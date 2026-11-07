@@ -86,6 +86,7 @@ body{
 .pu-title-accent{color:var(--accent)}
 .pu-section-pill{display:flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface-2);border-radius:999px;padding:8px 11px;font-size:9px;font-weight:750;color:var(--text)}
 .pu-section-pill svg{width:13px;height:13px}
+.pu-section-pill.is-simulado{background:color-mix(in srgb,var(--accent) 22%,var(--surface-2));border-color:var(--accent);color:var(--accent)}
 
 .pu-structure{display:grid;gap:13px;min-width:0}
 .pu-structure>*{min-width:0}

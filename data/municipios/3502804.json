@@ -1,0 +1,75 @@
+{
+  "ibge": "3502804",
+  "nome": "Araçatuba",
+  "uf": "SP",
+  "fonte": "Infosiga-SP (dados simulados para desenvolvimento)",
+  "periodo": "01–07 nov 2026",
+  "simulado": true,
+  "total": 298,
+  "porHora": [
+    16,
+    18,
+    20,
+    27,
+    48,
+    54,
+    75,
+    47,
+    33
+  ],
+  "porDia": [
+    31,
+    40,
+    47,
+    41,
+    45,
+    53,
+    41
+  ],
+  "variacaoSemanaPct": -4.4,
+  "pico": "18h",
+  "ranking": {
+    "tipo": "via",
+    "itens": [
+      {
+        "nome": "Avenida Floriano Peixoto",
+        "pct": 33
+      },
+      {
+        "nome": "Avenida Governador Mário Covas",
+        "pct": 17
+      },
+      {
+        "nome": "Rua Coronel José Dias",
+        "pct": 50
+      }
+    ]
+  },
+  "pontos": [
+    {
+      "lat": -21.215,
+      "lon": -50.439,
+      "n": 5
+    },
+    {
+      "lat": -21.197,
+      "lon": -50.444,
+      "n": 34
+    },
+    {
+      "lat": -21.219,
+      "lon": -50.425,
+      "n": 42
+    },
+    {
+      "lat": -21.201,
+      "lon": -50.45,
+      "n": 8
+    },
+    {
+      "lat": -21.188,
+      "lon": -50.427,
+      "n": 209
+    }
+  ]
+}

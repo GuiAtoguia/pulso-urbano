@@ -1,0 +1,12 @@
+{
+  "name": "pulso-urbano",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "gerar-simulado": "node scripts/gerar-simulado.js",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "vitest": "5.1.0"
+  }
+}
