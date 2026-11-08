@@ -1,9 +1,24 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-mode="light" data-color="azul">
+<html lang="pt-BR" data-color="azul">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pulso Urbano · Observatório de mobilidade</title>
+  <script>
+    // Aplica o tema antes da primeira pintura, pra não "piscar" o tema errado:
+    // usa a escolha salva do usuário; na primeira visita, segue prefers-color-scheme.
+    (function () {
+      try {
+        var salvo = localStorage.getItem('pulso-urbano-tema');
+        var modo = salvo === 'dark' || salvo === 'light'
+          ? salvo
+          : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.dataset.mode = modo;
+      } catch (e) {
+        document.documentElement.dataset.mode = 'light';
+      }
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -13,6 +28,17 @@
   <script src="https://unpkg.com/lucide@1.70.0/dist/umd/lucide.min.js"></script>
 </head>
 <body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <div id="statusAnuncio" class="sr-only" role="status" aria-live="polite"></div>
+  <div id="erroAnuncio" class="sr-only" role="alert" aria-live="assertive"></div>
+
+  <div id="offlineBanner" class="pu-offline-banner" role="alert" hidden>
+    <i data-lucide="wifi-off" aria-hidden="true"></i>
+    <span>Sem conexão com a internet.</span>
+    <button type="button" data-retry-offline>Tentar novamente</button>
+  </div>
+
   <div id="app"></div>
 
   <section id="regionPicker" class="region-picker" role="dialog" aria-label="Selecionar estado e cidade" aria-modal="false" hidden="">
@@ -21,6 +47,14 @@
     <div class="rp-list" id="rpList" role="listbox" aria-label="Opções de localidade"></div>
     <div class="rp-foot"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8c0 3.613-3.869 7.429-5.393 8.795a1 1 0 01-1.214 0C9.87 15.429 6 11.613 6 8a6 6 0 0112 0"></path><path d="M4.474 15h-.197a1 1 0 00-.969.753l-1.097 4.35a1.5 1.5 0 001.444 1.898L20.344 22a1.5 1.5 0 001.446-1.897l-1.098-4.35a1 1 0 00-.969-.753h-.197"></path><circle cx="12" cy="8" r="2"></circle></svg><span id="rpFoot">Selecione um estado</span></div>
   </section>
+
+  <dialog id="fontesModal" class="fontes-modal" aria-labelledby="fontesModalTitulo">
+    <div class="fontes-modal-head">
+      <h2 id="fontesModalTitulo" tabindex="-1"><i data-lucide="book-open-text"></i>Fontes e metodologia</h2>
+      <button type="button" class="rp-close" id="fontesModalFechar" aria-label="Fechar"><i data-lucide="x"></i></button>
+    </div>
+    <div class="fontes-modal-corpo" id="fontesModalCorpo"></div>
+  </dialog>
 
   <script type="module" src="js/app.js"></script>
 </body>
