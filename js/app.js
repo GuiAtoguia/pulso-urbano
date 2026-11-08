@@ -3,7 +3,7 @@
 // são alimentados por data/municipios/<ibge>.json (ver js/data.js e CLAUDE.md).
 // Clima e visão geral ainda não estão ligados a dados reais (fora do escopo desta etapa).
 
-import { scaleHeat, formatVariacaoPct, topVias, buildWeekPath, raioPonto, buildLegendaPontos, classificarPonto, CORES_PONTOS, FAIXAS_HORARIAS } from './calc.js';
+import { scaleHeat, formatVariacaoPct, fimDoPeriodo, topVias, buildWeekPath, raioPonto, buildLegendaPontos, classificarPonto, CORES_PONTOS, FAIXAS_HORARIAS } from './calc.js';
 import { carregarMunicipio, carregarIndice } from './data.js';
 import { gerarInsights, TOTAL_MINIMO_RANKING } from './insights.js';
 import { buscarClima, weathercodeParaIcone, weathercodeParaTexto } from './clima.js';
@@ -38,19 +38,23 @@ function topHeader() {
   return `<header class="pu-header">
     <div class="pu-header-brand"><div class="pu-header-mark"><i data-lucide="activity"></i></div><div><strong>Pulso <em>Urbano</em></strong><small>Observatório de mobilidade</small></div></div>
     <nav class="pu-navigation" aria-label="Navegação"><span class="pu-nav-current"><i data-lucide="map"></i>Mapa</span><button type="button" data-open-fontes aria-haspopup="dialog"><i data-lucide="book-open-text"></i>Fontes</button></nav>
-    <div class="pu-header-tools"><button type="button" class="pu-location" data-open-location aria-haspopup="dialog" aria-label="${escapeHTML(region.name)}, ${escapeHTML(region.uf)} — selecionar outro estado ou cidade"><i data-lucide="map-pin"></i><span class="location-name">${escapeHTML(region.name)}, ${escapeHTML(region.uf)}</span><i data-lucide="chevron-down" class="city-chevron"></i></button><button type="button" class="pu-round-icon demo-theme-toggle" data-demo-theme aria-label="Alternar tema claro e escuro" title="Alternar tema"><i data-lucide="${state.mode === 'dark' ? 'sun' : 'moon'}"></i></button></div>
+    <div class="pu-header-tools"><button type="button" class="pu-location" data-open-location aria-haspopup="dialog" aria-label="${escapeHTML(region.name)}, ${escapeHTML(region.uf)}: selecionar outro estado ou cidade"><i data-lucide="map-pin"></i><span class="location-name">${escapeHTML(region.name)}, ${escapeHTML(region.uf)}</span><i data-lucide="chevron-down" class="city-chevron"></i></button><button type="button" class="pu-round-icon demo-theme-toggle" data-demo-theme aria-label="Alternar tema claro e escuro" title="Alternar tema"><i data-lucide="${state.mode === 'dark' ? 'sun' : 'moon'}"></i></button></div>
   </header>`;
 }
 
+// Os 4 links abrem o modal "Fontes e metodologia" (mesmo listener delegado do
+// botão "Fontes" do header, ver [data-open-fontes] mais abaixo) — é onde Dados
+// abertos, Metodologia, Acessibilidade e Sobre o projeto realmente têm conteúdo.
 function demoFooter() {
-  return `<footer class="pu-footer"><div class="pu-footer-primary"><div class="pu-foot-links"><span><i data-lucide="database"></i>Dados abertos</span><span><i data-lucide="shield-check"></i>Metodologia</span><span><i data-lucide="accessibility"></i>Acessibilidade</span><span><i data-lucide="info"></i>Sobre o projeto</span></div></div><div class="pu-footer-secondary"><span><i data-lucide="calendar-days"></i>2026 · Ideathon Fatec</span><span><i data-lucide="map"></i>Pesquisa territorial · Interface demonstrativa</span></div></footer>`;
+  return `<footer class="pu-footer"><div class="pu-footer-primary"><div class="pu-foot-links"><button type="button" data-open-fontes aria-haspopup="dialog"><i data-lucide="database"></i>Dados abertos</button><button type="button" data-open-fontes aria-haspopup="dialog"><i data-lucide="shield-check"></i>Metodologia</button><button type="button" data-open-fontes aria-haspopup="dialog"><i data-lucide="accessibility"></i>Acessibilidade</button><button type="button" data-open-fontes aria-haspopup="dialog"><i data-lucide="info"></i>Sobre o projeto</button></div></div><div class="pu-footer-secondary"><span><i data-lucide="calendar-days"></i>2026 · Ideathon Fatec</span></div></footer>`;
 }
 
 // O selo "Simulado" só aparece quando a flag `simulado` do JSON é true — nunca por texto fixo.
-function sectionTitle(title, description = '', simulado = false) {
+// `periodoLabel` vem do período real do JSON (ver fimDoPeriodo em calc.js) — nunca uma data fixa.
+function sectionTitle(title, description = '', simulado = false, periodoLabel = '—') {
   const [first, ...rest] = title.split(' ');
   const selo = simulado ? `<span class="pu-section-pill is-simulado" title="Estes números vêm de um conjunto de dados simulado"><i data-lucide="flask-conical"></i>Simulado</span>` : '';
-  return `<div class="pu-section-label"><div><div class="overline">EXPLORAR TERRITÓRIO</div><h1><span class="pu-title-accent">${first}</span> ${rest.join(' ')}</h1>${description ? `<p>${description}</p>` : ''}</div><span class="pu-section-pill"><i data-lucide="calendar-days"></i>01–07 nov 2026</span>${selo}</div>`;
+  return `<div class="pu-section-label"><div><div class="overline">EXPLORAR TERRITÓRIO</div><h1><span class="pu-title-accent">${first}</span> ${rest.join(' ')}</h1>${description ? `<p>${description}</p>` : ''}</div><span class="pu-section-pill"><i data-lucide="calendar-days"></i>${escapeHTML(periodoLabel)}</span>${selo}</div>`;
 }
 
 function widget(label, icon, content, subtype = '') {
@@ -89,11 +93,13 @@ function mensagemSemDados() {
 
 function statsWidget(dados) {
   if (!dados) return `<div class="pu-stats"><div class="pu-stat" style="grid-column:1/-1"><div><i data-lucide="circle-off"></i><span>Sinistros</span></div><strong>—</strong><small>${escapeHTML(textoEstadoMunicipio())}</small></div></div>`;
-  const viasMapeadas = dados.ranking?.itens?.length ?? 0;
+  // Mesmo limiar do ranking de vias (ver insights.js) — sem ranking confiável, o KPI some em vez de mostrar uma contagem solta.
+  const rankingSuficiente = Number.isFinite(dados.totalPeriodoCompleto) && dados.totalPeriodoCompleto >= TOTAL_MINIMO_RANKING;
+  const viasMapeadas = rankingSuficiente ? (dados.ranking?.itens?.length ?? 0) : null;
   return `<div class="pu-stats">
-    <div class="pu-stat"><div><i data-lucide="map-pinned"></i><span>Total</span></div><strong>${Number.isFinite(dados.total) ? dados.total : '—'}</strong><small>sinistros no período</small></div>
+    <div class="pu-stat"><div><i data-lucide="map-pinned"></i><span>Total</span></div><strong>${Number.isFinite(dados.totalPeriodoCompleto) ? dados.totalPeriodoCompleto : '—'}</strong><small>desde 2022 · últimas 2 semanas: ${Number.isFinite(dados.totalUltimas2Semanas) ? dados.totalUltimas2Semanas : '—'}</small></div>
     <div class="pu-stat"><div><i data-lucide="clock-4"></i><span>Pico</span></div><strong>${escapeHTML(dados.pico ?? '—')}</strong><small>horário de maior concentração</small></div>
-    <div class="pu-stat"><div><i data-lucide="route"></i><span>Vias</span></div><strong>${viasMapeadas}</strong><small>mapeadas no ranking</small></div>
+    <div class="pu-stat"><div><i data-lucide="route"></i><span>Vias</span></div><strong>${viasMapeadas === null ? '—' : viasMapeadas}</strong><small>mapeadas no ranking</small></div>
   </div>`;
 }
 
@@ -101,31 +107,48 @@ function heatWidget(dados) {
   if (!dados) return widget('Intensidade por horário', 'waves', mensagemSemDados(), 'pu-heat-widget');
   const porHora = Array.isArray(dados.porHora) ? dados.porHora : [];
   const max = Math.max(...porHora, 1);
-  const tiles = porHora.map(v => `<div class="pu-soft-tile" style="--heat:${scaleHeat(v, max)}"><span></span></div>`).join('');
+  const totalFaixas = porHora.reduce((soma, v) => soma + v, 0);
+  const indicePico = FAIXAS_HORARIAS.indexOf(dados.pico);
+  const tiles = porHora.map((v, i) => {
+    const faixaLabel = `${FAIXAS_HORARIAS[i]} a ${FAIXAS_HORARIAS[i + 1] ?? '24h'}`;
+    const pct = totalFaixas > 0 ? Math.round((v / totalFaixas) * 100) : 0;
+    const descricao = `${faixaLabel}: ${v} sinistro${v === 1 ? '' : 's'} (${pct}% do total)`;
+    const classeExtra = i === indicePico ? ' is-pico' : '';
+    return `<div class="pu-soft-tile${classeExtra}" style="--heat:${scaleHeat(v, max)}" role="img" title="${escapeHTML(descricao)}" aria-label="${escapeHTML(descricao)}${i === indicePico ? ', horário de pico' : ''}"><span></span></div>`;
+  }).join('');
   const tabela = tabelaOculta(
-    'Sinistros por faixa de horário, das 06h às 24h (sinistros de madrugada, 00h–06h, não entram neste gráfico)',
+    'Sinistros por faixa de horário, das 06h às 24h (sinistros de madrugada, 00h às 06h, não entram neste gráfico)',
     'Faixa',
-    porHora.map((v, i) => [`${FAIXAS_HORARIAS[i]}–${FAIXAS_HORARIAS[i + 1] ?? '24h'}`, v]),
+    porHora.map((v, i) => [`${FAIXAS_HORARIAS[i]} a ${FAIXAS_HORARIAS[i + 1] ?? '24h'}`, v]),
   );
-  return widget('Intensidade por horário', 'waves', `<div class="pu-heat-intro"><strong>${escapeHTML(dados.pico ?? '—')}</strong><span>horário de maior atividade</span></div><div class="pu-soft-heat" aria-hidden="true">${tiles}</div><div class="pu-heat-labels" aria-hidden="true"><span>06h</span><span>12h</span><span>18h</span><span>23h</span></div>${tabela}`, 'pu-heat-widget');
+  return widget('Intensidade por horário', 'waves', `<div class="pu-heat-intro"><strong>${escapeHTML(dados.pico ?? '—')}</strong><span>horário de maior atividade</span></div><div class="pu-soft-heat">${tiles}</div><div class="pu-heat-labels" aria-hidden="true"><span>06h</span><span>12h</span><span>18h</span><span>23h</span></div>${tabela}`, 'pu-heat-widget');
 }
 
 function trendWidget(dados) {
-  if (!dados) return widget('Variação na semana', 'chart-spline', mensagemSemDados(), 'pu-trend-widget');
+  if (!dados) return widget('Sinistros por dia da semana', 'chart-spline', mensagemSemDados(), 'pu-trend-widget');
   const porDia = Array.isArray(dados.porDia) ? dados.porDia : [];
   const { line, area, points } = buildWeekPath(porDia);
   const ultimo = points[points.length - 1];
   const ponteiro = ultimo ? `<circle cx="${ultimo[0]}" cy="${ultimo[1]}" r="5" fill="var(--accent)" stroke="var(--surface)" stroke-width="3"/>` : '';
-  const sinal = Number.isFinite(dados.variacaoSemanaPct) ? (dados.variacaoSemanaPct > 0 ? 'aumento' : dados.variacaoSemanaPct < 0 ? 'queda' : 'estável') : 'sem comparação possível';
   const tabela = tabelaOculta('Sinistros por dia, última semana completa', 'Dia', DIAS_SEMANA.map((d, i) => [d, porDia[i] ?? 0]));
-  return widget('Variação na semana', 'chart-spline', `<div class="pu-chart-value"><strong>${formatVariacaoPct(dados.variacaoSemanaPct)}</strong><span>em relação à semana anterior (${sinal})</span></div><svg class="pu-smooth-chart" viewBox="0 0 480 150" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="softFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(--accent)" stop-opacity=".27"/><stop offset="100%" stop-color="var(--accent)" stop-opacity=".025"/></linearGradient></defs><path class="pu-chart-grid" d="M0 35H480 M0 82H480 M0 130H480"/><path class="pu-chart-fill" d="${area}"/><path class="pu-chart-stroke" d="${line}"/>${ponteiro}</svg><div class="pu-week-labels" aria-hidden="true"><span>Dom</span><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span></div>${tabela}`, 'pu-trend-widget');
+  // Variação semanal: valor secundário do cartão. Com amostra pequena (menos de
+  // TOTAL_MINIMO_VARIACAO sinistros nas 2 últimas semanas somadas), não falamos em
+  // aumento/queda — mesma regra de insights.js (ver dados.amostraSemanalPequena).
+  const valorVariacao = dados.amostraSemanalPequena
+    ? `<strong>${escapeHTML(MSG.amostraSemanalPequena)}</strong><span>${escapeHTML(MSG.amostraSemanalPequenaDetalhe)}</span>`
+    : (() => {
+        const sinal = Number.isFinite(dados.variacaoSemanaPct) ? (dados.variacaoSemanaPct > 0 ? 'aumento' : dados.variacaoSemanaPct < 0 ? 'queda' : 'estável') : 'sem comparação possível';
+        return `<strong>${formatVariacaoPct(dados.variacaoSemanaPct)}</strong><span>em relação à semana anterior (${sinal})</span>`;
+      })();
+  return widget('Sinistros por dia da semana', 'chart-spline', `<div class="pu-chart-value">${valorVariacao}</div><svg class="pu-smooth-chart" viewBox="0 0 480 150" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="softFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(--accent)" stop-opacity=".27"/><stop offset="100%" stop-color="var(--accent)" stop-opacity=".025"/></linearGradient></defs><path class="pu-chart-grid" d="M0 35H480 M0 82H480 M0 130H480"/><path class="pu-chart-fill" d="${area}"/><path class="pu-chart-stroke" d="${line}"/>${ponteiro}</svg><div class="pu-week-labels" aria-hidden="true"><span>Dom</span><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span></div>${tabela}`, 'pu-trend-widget');
 }
 
 function viasWidget(dados) {
   if (!dados) return widget('Vias em destaque', 'list-filter', mensagemSemDados(), 'pu-list-widget');
-  // Mesmo limiar da "Visão geral" (ver insights.js) — com poucos sinistros, o ranking
-  // de vias não é estatisticamente confiável, então nenhum dos dois widgets o mostra.
-  if (!Number.isFinite(dados.total) || dados.total < TOTAL_MINIMO_RANKING) {
+  // Mesmo limiar da "Visão geral" (ver insights.js) — com poucos sinistros no período
+  // completo, o ranking de vias não é estatisticamente confiável, então nenhum dos
+  // dois widgets o mostra. Nunca usa o total de 2 semanas: o ranking é sobre o histórico.
+  if (!Number.isFinite(dados.totalPeriodoCompleto) || dados.totalPeriodoCompleto < TOTAL_MINIMO_RANKING) {
     return widget('Vias em destaque', 'list-filter', `<p class="pu-widget-foot" style="margin-top:0;padding-top:0;border-top:0">${MSG.rankingInsuficiente}</p>`, 'pu-list-widget');
   }
   const itens = topVias(dados.ranking?.itens, 3);
@@ -157,7 +180,7 @@ function overviewWidget(dados) {
   const insights = dados ? gerarInsights(dados) : null;
   const semDadosTexto = textoEstadoMunicipio();
   const resumo = dados
-    ? `${Number.isFinite(dados.total) ? dados.total : '—'} sinistros registrados no período de ${escapeHTML(dados.periodo ?? '—')}, segundo ${escapeHTML(dados.fonte ?? 'fonte não informada')}.`
+    ? `${Number.isFinite(dados.totalPeriodoCompleto) ? dados.totalPeriodoCompleto : '—'} sinistros registrados desde 2022, segundo ${escapeHTML(dados.fonte ?? 'fonte não informada')}. Nas últimas 2 semanas completas do extrato (${escapeHTML(dados.periodo ?? '—')}), foram ${Number.isFinite(dados.totalUltimas2Semanas) ? dados.totalUltimas2Semanas : '—'}.`
     : semDadosTexto;
   return widget('Visão geral', 'notebook-tabs', `
     <div class="pu-overview-layout">
@@ -213,8 +236,22 @@ leafletEl.className = 'pu-leaflet-map';
 let leafletMap = null;
 let leafletTiles = null;
 let leafletPontos = null;
-let tileAvisoAtivo = false;
 let ultimoCentro = null;
+
+// Contadores cumulativos de tiles (não um boolean fixado no primeiro erro): o aviso só
+// aparece quando a MAIORIA dos tiles falhou, com uma amostra mínima — um tile isolado
+// (comum até numa rede saudável) nunca deve acender o aviso.
+const MIN_AMOSTRA_TILES = 6;
+const LIMIAR_AVISO_TILES = 0.5;
+let tilesCarregados = 0;
+let tilesComErro = 0;
+
+function avaliarAvisoTiles() {
+  const aviso = $('#mapTileWarning'); // recriado a cada render(); sempre busca o nó atual
+  if (!aviso) return;
+  const total = tilesCarregados + tilesComErro;
+  aviso.hidden = total < MIN_AMOSTRA_TILES || (tilesComErro / total) <= LIMIAR_AVISO_TILES;
+}
 
 function desenharPontos() {
   if (!leafletPontos) return;
@@ -232,9 +269,9 @@ function desenharPontos() {
     window.L.circleMarker([ponto.lat, ponto.lon], {
       radius: raioPonto(ponto.n, maxN),
       color: cor.stroke,
-      weight: 1.5,
+      weight: 1,
       fillColor: cor.fill,
-      fillOpacity: 0.85,
+      fillOpacity: 0.55,
     })
       .bindPopup(`<strong>${ponto.n}</strong> sinistro${ponto.n === 1 ? '' : 's'} registrado${ponto.n === 1 ? '' : 's'} nesta área`)
       .addTo(leafletPontos);
@@ -254,11 +291,11 @@ function montarMapa() {
       maxZoom: 19,
       minZoom: 3,
     }).addTo(leafletMap);
+    leafletTiles.on('tileload', () => { tilesCarregados++; avaliarAvisoTiles(); });
     leafletTiles.on('tileerror', erro => {
       console.warn('[app] falha ao carregar um tile do mapa (OpenStreetMap)', erro);
-      tileAvisoAtivo = true;
-      const aviso = $('#mapTileWarning');
-      if (aviso) aviso.hidden = false;
+      tilesComErro++;
+      avaliarAvisoTiles();
     });
     leafletPontos = window.L.layerGroup().addTo(leafletMap);
     ultimoCentro = `${region.lat},${region.lon}`;
@@ -267,12 +304,12 @@ function montarMapa() {
     if (centroAtual !== ultimoCentro) {
       leafletMap.setView([region.lat, region.lon], 13);
       ultimoCentro = centroAtual;
+      tilesCarregados = 0; tilesComErro = 0; // região nova: a taxa de erro da cidade anterior não vale mais
     }
   }
   leafletEl.setAttribute('role', 'region');
   leafletEl.setAttribute('aria-label', `Mapa de ${region.name}, ${region.uf}. Use as setas para mover e + ou - para dar zoom.`);
-  const aviso = $('#mapTileWarning');
-  if (aviso) aviso.hidden = !tileAvisoAtivo;
+  avaliarAvisoTiles();
   desenharPontos();
   requestAnimationFrame(() => leafletMap.invalidateSize());
 }
@@ -282,8 +319,11 @@ window.addEventListener('resize', () => { if (leafletMap) leafletMap.invalidateS
 function renderAppContent() {
   const dados = municipioData.status === 'ok' ? municipioData.dados : null;
   const simulado = Boolean(dados?.simulado);
+  const periodoLabel = dados
+    ? `Dados até ${fimDoPeriodo(dados.periodo) ?? '—'}`
+    : (municipioData.status === 'carregando' ? 'Carregando período…' : '—');
   return `<div class="pu-demo is-filled">${topHeader()}<main class="pu-demo-body" id="conteudo" tabindex="-1">
-    <div class="pu-content-title">${sectionTitle('Grade de observação', 'Indicadores, cartografia e contexto', simulado)}</div>
+    <div class="pu-content-title">${sectionTitle('Grade de observação', 'Indicadores, cartografia e contexto', simulado, periodoLabel)}</div>
     <div class="pu-layout pu-grid">
       <div class="pu-structure pu-grid-structure">
         <div class="pu-grid-stats">${statsWidget(dados)}</div>
@@ -323,7 +363,7 @@ async function carregarDadosDoMunicipio() {
   if (resultado.ok) {
     municipioData.status = 'ok';
     municipioData.dados = resultado.dados;
-    anunciar(`Dados de ${region.name} carregados: ${resultado.dados.total} sinistros no período.`);
+    anunciar(`Dados de ${region.name} carregados: ${resultado.dados.totalPeriodoCompleto} sinistros desde 2022 (últimas 2 semanas: ${resultado.dados.totalUltimas2Semanas}).`);
   } else if (resultado.motivo === 'sem-dados' || resultado.motivo === 'sem-ibge') {
     municipioData.status = 'sem-dados';
     municipioData.dados = null;
@@ -380,21 +420,26 @@ const fontesModal = $('#fontesModal');
 const fontesModalCorpo = $('#fontesModalCorpo');
 const fontesModalTitulo = $('#fontesModalTitulo');
 
-function abrirFontesModal() {
+// Guarda o botão que abriu o modal (há vários agora: header + 4 do rodapé) pra
+// devolver o foco exatamente a ele ao fechar, não sempre ao primeiro da página.
+let fontesModalGatilho = null;
+function abrirFontesModal(gatilho) {
+  fontesModalGatilho = gatilho ?? null;
   const dados = municipioData.status === 'ok' ? municipioData.dados : null;
   fontesModalCorpo.innerHTML = montarConteudoFontes(dados);
   fontesModal.showModal();
   fontesModalTitulo.focus();
 }
 fontesModal.addEventListener('close', () => {
-  document.querySelector('[data-open-fontes]')?.focus();
+  (fontesModalGatilho?.isConnected ? fontesModalGatilho : document.querySelector('[data-open-fontes]'))?.focus();
 });
 fontesModal.addEventListener('click', e => {
   if (e.target === fontesModal) fontesModal.close(); // clique no backdrop
 });
 $('#fontesModalFechar').addEventListener('click', () => fontesModal.close());
 document.addEventListener('click', e => {
-  if (e.target.closest('[data-open-fontes]')) abrirFontesModal();
+  const gatilho = e.target.closest('[data-open-fontes]');
+  if (gatilho) abrirFontesModal(gatilho);
 });
 
 // Seletor Estado -> Município inspirado no Material You.

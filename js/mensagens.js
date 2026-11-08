@@ -18,6 +18,8 @@ export const MSG = {
   erroCarregarMunicipioDetalhe: 'Verifique sua conexão e tente novamente.',
 
   rankingInsuficiente: 'dados insuficientes para ranking',
+  amostraSemanalPequena: 'Amostra pequena',
+  amostraSemanalPequenaDetalhe: 'menos de 30 sinistros nas 2 últimas semanas somadas',
 
   climaIndisponivel: 'Clima indisponível no momento.',
 
@@ -29,7 +31,7 @@ export const MSG = {
   localizandoCidade: nome => `Localizando ${nome}...`,
   localizandoCidadeDetalhe: 'Consultando coordenadas do município.',
 
-  listaMunicipiosReduzida: 'Não foi possível atualizar a lista completa de municípios agora — mostrando uma lista reduzida.',
+  listaMunicipiosReduzida: 'Não foi possível atualizar a lista completa de municípios agora, mostrando uma lista reduzida.',
 
   semConexao: 'Sem conexão com a internet.',
   semConexaoDetalhe: 'Verifique sua rede e tente novamente.',
@@ -38,5 +40,5 @@ export const MSG = {
   tentarNovamente: 'Tentar novamente',
   escolherOutroMunicipio: 'Escolher outro município',
 
-  regiaoSalvaInvalida: 'A região salva não foi reconhecida — voltando para Araçatuba.',
+  regiaoSalvaInvalida: 'A região salva não foi reconhecida, voltando para Araçatuba.',
 };

@@ -97,7 +97,7 @@ async function main() {
     nome: MUNICIPIO.nome,
     uf: MUNICIPIO.uf,
     fonte: 'Infosiga-SP (dados simulados para desenvolvimento)',
-    periodo: '01–07 nov 2026',
+    periodo: '01 a 07 nov 2026',
     simulado: true,
     total,
     porHora,

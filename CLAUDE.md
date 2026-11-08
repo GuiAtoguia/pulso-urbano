@@ -22,9 +22,16 @@ sem servidor, sem login e sem chave de API privada. Escopo: Araçatuba e municí
 - CSV bruto fica em `data-raw/` (fora do Git). Só os JSON gerados vão para `data/`.
 - Nunca inventar dado. Se faltar informação, perguntar.
 - Contrato por município em `data/municipios/<codigoIBGE>.json`:
-  { ibge, nome, uf, fonte, periodo, simulado, total, porHora[9], porDia[7],
+  { ibge, nome, uf, fonte, periodo, simulado, totalPeriodoCompleto,
+    totalUltimas2Semanas, amostraSemanalPequena, porHora[9], porDia[7],
     variacaoSemanaPct, pico, ranking:{tipo:"via", itens:[{nome,pct}]},
     pontos:[{lat,lon,n}] }
+  `totalPeriodoCompleto` é 2022 até a última data do extrato (mesmo universo de
+  `porHora`/`ranking`/`pontos`); `totalUltimas2Semanas` é a soma das 2 últimas
+  semanas completas do extrato (nunca só a mais recente). `amostraSemanalPequena`
+  é `true` quando `totalUltimas2Semanas` < 30 — nesse caso `variacaoSemanaPct` é
+  `null` e a tela nunca fala em aumento/queda. O mínimo de 20 para mostrar o
+  ranking de vias é sobre `totalPeriodoCompleto`, nunca sobre a janela de 2 semanas.
 - `data/indice.json` lista os municípios com dados: [{ibge,nome,uf,lat,lon}].
 - `pontos` são coordenadas arredondadas (3 casas) e agrupadas, para não expor cada ocorrência.
 - Município sem arquivo: mostrar "sem dados para este município", nunca números fixos.

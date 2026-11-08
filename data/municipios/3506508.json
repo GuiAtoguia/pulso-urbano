@@ -2,10 +2,12 @@
   "ibge": "3506508",
   "nome": "Birigui",
   "uf": "SP",
-  "fonte": "Infosiga-SP — últimas 2 semanas completas disponíveis no extrato",
-  "periodo": "20 set 2026 – 26 set 2026",
+  "fonte": "Infosiga-SP: sinistros com vítimas (fatais e não fatais)",
+  "periodo": "20 set 2026 a 26 set 2026",
   "simulado": false,
-  "total": 8,
+  "totalPeriodoCompleto": 3016,
+  "totalUltimas2Semanas": 15,
+  "amostraSemanalPequena": true,
   "porHora": [
     355,
     258,
@@ -26,7 +28,7 @@
     0,
     3
   ],
-  "variacaoSemanaPct": 14.3,
+  "variacaoSemanaPct": null,
   "pico": "18h",
   "ranking": {
     "tipo": "via",

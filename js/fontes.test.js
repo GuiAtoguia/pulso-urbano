@@ -5,8 +5,8 @@ const municipioBase = {
   ibge: '3502804',
   nome: 'Araçatuba',
   uf: 'SP',
-  fonte: 'Infosiga-SP — últimas 2 semanas completas disponíveis no extrato',
-  periodo: '20 set 2026 – 26 set 2026',
+  fonte: 'Infosiga-SP: últimas 2 semanas completas disponíveis no extrato',
+  periodo: '20 set 2026 a 26 set 2026',
   simulado: false,
   total: 18,
 };
@@ -28,8 +28,8 @@ describe('montarConteudoFontes', () => {
 
   it('mostra periodo e fonte vindos do JSON, sem valores fixos', () => {
     const html = montarConteudoFontes(municipioBase);
-    expect(html).toContain('20 set 2026 – 26 set 2026');
-    expect(html).toContain('Infosiga-SP — últimas 2 semanas completas disponíveis no extrato');
+    expect(html).toContain('20 set 2026 a 26 set 2026');
+    expect(html).toContain('Infosiga-SP: últimas 2 semanas completas disponíveis no extrato');
   });
 
   it('simulado: true mostra o aviso destacado "Dados simulados"', () => {

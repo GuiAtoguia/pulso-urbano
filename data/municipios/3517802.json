@@ -2,10 +2,12 @@
   "ibge": "3517802",
   "nome": "Guaraçaí",
   "uf": "SP",
-  "fonte": "Infosiga-SP — últimas 2 semanas completas disponíveis no extrato",
-  "periodo": "20 set 2026 – 26 set 2026",
+  "fonte": "Infosiga-SP: sinistros com vítimas (fatais e não fatais)",
+  "periodo": "20 set 2026 a 26 set 2026",
   "simulado": false,
-  "total": 0,
+  "totalPeriodoCompleto": 92,
+  "totalUltimas2Semanas": 0,
+  "amostraSemanalPequena": true,
   "porHora": [
     9,
     7,
@@ -26,7 +28,7 @@
     0,
     0
   ],
-  "variacaoSemanaPct": 0,
+  "variacaoSemanaPct": null,
   "pico": "18h",
   "ranking": {
     "tipo": "via",

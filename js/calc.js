@@ -19,6 +19,14 @@ export function formatVariacaoPct(valor) {
   return `${sinal}${abs}%`;
 }
 
+// Extrai a data final de um `periodo` ("20 set 2026 a 26 set 2026" -> "26 set 2026"),
+// pro selo "Dados até ...": nunca um número fixo de protótipo.
+export function fimDoPeriodo(periodo) {
+  if (typeof periodo !== 'string' || !periodo.trim()) return null;
+  const partes = periodo.split(' a ');
+  return partes[partes.length - 1].trim() || null;
+}
+
 export function topVias(itens, n = 3) {
   if (!Array.isArray(itens)) return [];
   return [...itens].sort((a, b) => b.pct - a.pct).slice(0, n);
@@ -56,7 +64,7 @@ const FAIXAS_CHAVES = ['baixo', 'medio', 'alto'];
 
 // Raio (px) de um circleMarker proporcional a n, em escala de área (sqrt) — evita que
 // valores grandes dominem visualmente demais o mapa. Satura entre min e max.
-export function raioPonto(n, maxN, { min = 6, max = 22 } = {}) {
+export function raioPonto(n, maxN, { min = 4, max = 14 } = {}) {
   if (!Number.isFinite(maxN) || maxN <= 0) return min;
   if (!Number.isFinite(n) || n <= 0) return min;
   const escala = Math.sqrt(Math.min(n, maxN) / maxN);
@@ -66,7 +74,7 @@ export function raioPonto(n, maxN, { min = 6, max = 22 } = {}) {
 // Gera as 3 faixas da legenda (baixo/médio/alto) a partir dos valores de n em pontos[].
 // Cada faixa traz rótulo (intervalo), raio equivalente e é usada tanto para desenhar
 // a legenda quanto para classificar cada ponto (ver classificarPonto).
-export function buildLegendaPontos(pontos, { min = 6, max = 22 } = {}) {
+export function buildLegendaPontos(pontos, { min = 4, max = 14 } = {}) {
   const valores = (Array.isArray(pontos) ? pontos : [])
     .map(p => p?.n)
     .filter(n => Number.isFinite(n) && n > 0);
@@ -85,7 +93,7 @@ export function buildLegendaPontos(pontos, { min = 6, max = 22 } = {}) {
     const limiteInferior = i === 0 ? limites[0] : Math.min(limites[i] + 1, limiteSuperior);
     return {
       chave,
-      rotulo: limiteInferior === limiteSuperior ? `${limiteInferior}` : `${limiteInferior}–${limiteSuperior}`,
+      rotulo: limiteInferior === limiteSuperior ? `${limiteInferior}` : `${limiteInferior} a ${limiteSuperior}`,
       min: limiteInferior,
       max: limiteSuperior,
       raio: raioPonto(limiteSuperior, maxN, { min, max }),

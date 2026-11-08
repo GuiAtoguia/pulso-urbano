@@ -27,7 +27,9 @@ export function validarMunicipio(dados) {
   if (typeof dados.nome !== 'string' || !dados.nome) return false;
   if (typeof dados.uf !== 'string') return false;
   if (typeof dados.simulado !== 'boolean') return false;
-  if (!numeroFinito(dados.total)) return false;
+  if (!numeroFinito(dados.totalPeriodoCompleto)) return false;
+  if (!numeroFinito(dados.totalUltimas2Semanas)) return false;
+  if (typeof dados.amostraSemanalPequena !== 'boolean') return false;
   if (!arrayDeNumeros(dados.porHora)) return false;
   if (!arrayDeNumeros(dados.porDia)) return false;
   if (dados.variacaoSemanaPct !== null && !numeroFinito(dados.variacaoSemanaPct)) return false;

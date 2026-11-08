@@ -9,12 +9,16 @@ import { createInterface } from 'node:readline';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { FAIXAS_HORARIAS as HORAS } from '../js/calc.js';
+import { TOTAL_MINIMO_VARIACAO } from '../js/insights.js';
 
 const RAIZ = fileURLToPath(new URL('..', import.meta.url));
 const ARQUIVOS_CSV = ['sinistros_2022-2024.csv', 'sinistros_2025-2026.csv'].map(f => path.join(RAIZ, 'data-raw', f));
 
 const REGIAO_ALVO = 'ARAÇATUBA';
-const TIPOS_VALIDOS = new Set(['SINISTRO NAO FATAL', 'SINISTRO FATAL']);
+// Só os 2 tipo_registro com gravidade classificada — bate com o total oficial do
+// painel Infosiga-SP por ano/estado (ver scripts/verificar-totais.js e docs/notas.md).
+// NOTIFICACAO fica fora: incluída, o total passa 47-86% acima do oficial.
+export const TIPOS_VALIDOS = new Set(['SINISTRO NAO FATAL', 'SINISTRO FATAL']);
 const LAT_MIN = -26, LAT_MAX = -19, LON_MIN = -54, LON_MAX = -44; // faixa larga de SP, só pra descartar outliers grosseiros
 const TOP_RANKING = 10;
 const CONECTORES = new Set(['de', 'da', 'do', 'das', 'dos', 'e']);
@@ -69,7 +73,7 @@ const UM_DIA = 24 * 60 * 60 * 1000;
 
 // --- leitura dos CSVs -------------------------------------------------------------
 
-async function lerCsv(caminho, porMunicipio, estadoGlobal) {
+export async function lerCsv(caminho, porMunicipio, estadoGlobal) {
   const stream = createReadStream(caminho, { encoding: 'latin1' });
   const rl = createInterface({ input: stream, crlfDelay: Infinity });
   let header = null;
@@ -186,6 +190,34 @@ function totalNoIntervalo(registros, inicioTs, fimTs) {
   return total;
 }
 
+// totalPeriodoCompleto: 2022 até a última data do extrato, mesmo universo de
+// porHora/ranking/pontos. totalUltimas2Semanas: soma das 2 últimas semanas completas
+// (a atual + a anterior) — nunca só a mais recente. amostraSemanalPequena: abaixo de
+// TOTAL_MINIMO_VARIACAO sinistros nas 2 semanas somadas, não dá pra falar em
+// aumento/queda (ver js/insights.js, que lê esta flag pra montar a frase).
+export function calcularTotais(registros, { inicioSemanaAtualTs, fimSemanaAtualTs, inicioSemanaAnteriorTs, fimSemanaAnteriorTs }) {
+  const totalSemanaAtual = totalNoIntervalo(registros, inicioSemanaAtualTs, fimSemanaAtualTs);
+  const totalSemanaAnterior = totalNoIntervalo(registros, inicioSemanaAnteriorTs, fimSemanaAnteriorTs);
+  const totalUltimas2Semanas = totalSemanaAtual + totalSemanaAnterior;
+  const amostraSemanalPequena = totalUltimas2Semanas < TOTAL_MINIMO_VARIACAO;
+
+  let variacaoSemanaPct;
+  if (amostraSemanalPequena) {
+    variacaoSemanaPct = null;
+  } else if (totalSemanaAnterior > 0) {
+    variacaoSemanaPct = Number((((totalSemanaAtual - totalSemanaAnterior) / totalSemanaAnterior) * 100).toFixed(1));
+  } else {
+    variacaoSemanaPct = totalSemanaAtual === 0 ? 0 : null; // sem base de comparação (semana anterior zerada)
+  }
+
+  return {
+    totalPeriodoCompleto: registros.length,
+    totalUltimas2Semanas,
+    amostraSemanalPequena,
+    variacaoSemanaPct,
+  };
+}
+
 // --- IBGE (nome oficial) e Nominatim (coordenadas) ---------------------------------
 
 async function buscarComTimeout(url, opts = {}, timeoutMs = 8000) {
@@ -242,7 +274,7 @@ async function main() {
   const fimSemanaAnteriorTs = fimSemanaAtualTs - 7 * UM_DIA;
   const inicioSemanaAnteriorTs = fimSemanaAnteriorTs - 6 * UM_DIA;
 
-  const periodo = `${formatDataCurta(inicioSemanaAtualTs)} – ${formatDataCurta(fimSemanaAtualTs)}`;
+  const periodo = `${formatDataCurta(inicioSemanaAtualTs)} a ${formatDataCurta(fimSemanaAtualTs)}`;
   console.log(`Última semana completa do extrato: ${periodo}`);
 
   const indice = [];
@@ -258,24 +290,21 @@ async function main() {
 
     const { porHora, pico } = calcularPorHora(registros);
     const porDia = calcularPorDia(registros, fimSemanaAtualTs);
-    const totalSemanaAtual = totalNoIntervalo(registros, inicioSemanaAtualTs, fimSemanaAtualTs);
-    const totalSemanaAnterior = totalNoIntervalo(registros, inicioSemanaAnteriorTs, fimSemanaAnteriorTs);
-
-    let variacaoSemanaPct;
-    if (totalSemanaAnterior > 0) {
-      variacaoSemanaPct = Number((((totalSemanaAtual - totalSemanaAnterior) / totalSemanaAnterior) * 100).toFixed(1));
-    } else {
-      variacaoSemanaPct = totalSemanaAtual === 0 ? 0 : null; // sem base de comparação (semana anterior zerada)
-    }
+    const { totalPeriodoCompleto, totalUltimas2Semanas, amostraSemanalPequena, variacaoSemanaPct } = calcularTotais(
+      registros,
+      { inicioSemanaAtualTs, fimSemanaAtualTs, inicioSemanaAnteriorTs, fimSemanaAnteriorTs },
+    );
 
     const municipioJson = {
       ibge,
       nome,
       uf: 'SP',
-      fonte: 'Infosiga-SP — últimas 2 semanas completas disponíveis no extrato',
+      fonte: 'Infosiga-SP: sinistros com vítimas (fatais e não fatais)',
       periodo,
       simulado: false,
-      total: totalSemanaAtual,
+      totalPeriodoCompleto,
+      totalUltimas2Semanas,
+      amostraSemanalPequena,
       porHora,
       porDia,
       variacaoSemanaPct,
@@ -306,7 +335,9 @@ async function main() {
   console.log(`\nGerado data/indice.json (${indice.length} município(s)) e data/municipios/*.json (${porMunicipio.size} arquivo(s)).`);
 }
 
-main().catch(erro => {
-  console.error(erro);
-  process.exitCode = 1;
-});
+if (fileURLToPath(import.meta.url) === path.resolve(process.argv[1] || '')) {
+  main().catch(erro => {
+    console.error(erro);
+    process.exitCode = 1;
+  });
+}

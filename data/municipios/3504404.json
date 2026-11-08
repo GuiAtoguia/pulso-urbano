@@ -2,10 +2,12 @@
   "ibge": "3504404",
   "nome": "Avanhandava",
   "uf": "SP",
-  "fonte": "Infosiga-SP — últimas 2 semanas completas disponíveis no extrato",
-  "periodo": "20 set 2026 – 26 set 2026",
+  "fonte": "Infosiga-SP: sinistros com vítimas (fatais e não fatais)",
+  "periodo": "20 set 2026 a 26 set 2026",
   "simulado": false,
-  "total": 2,
+  "totalPeriodoCompleto": 126,
+  "totalUltimas2Semanas": 4,
+  "amostraSemanalPequena": true,
   "porHora": [
     13,
     9,
@@ -26,7 +28,7 @@
     0,
     0
   ],
-  "variacaoSemanaPct": 0,
+  "variacaoSemanaPct": null,
   "pico": "16h",
   "ranking": {
     "tipo": "via",

@@ -6,9 +6,11 @@ const municipioValido = {
   nome: 'Araçatuba',
   uf: 'SP',
   fonte: 'Infosiga-SP',
-  periodo: '20 set 2026 – 26 set 2026',
+  periodo: '20 set 2026 a 26 set 2026',
   simulado: false,
-  total: 18,
+  totalPeriodoCompleto: 298,
+  totalUltimas2Semanas: 34,
+  amostraSemanalPequena: false,
   porHora: [1, 2, 3, 4, 5, 6, 7, 8, 9],
   porDia: [1, 2, 3, 2, 3, 4, 3],
   variacaoSemanaPct: 12.5,
@@ -25,7 +27,9 @@ describe('validarMunicipio', () => {
   it('aceita total 0 e arrays vazios (dado válido, só sem ocorrência)', () => {
     expect(validarMunicipio({
       ...municipioValido,
-      total: 0,
+      totalPeriodoCompleto: 0,
+      totalUltimas2Semanas: 0,
+      amostraSemanalPequena: true,
       porHora: [],
       porDia: [],
       ranking: { tipo: 'via', itens: [] },
@@ -43,7 +47,7 @@ describe('validarMunicipio', () => {
   });
 
   it('rejeita quando falta um campo obrigatório', () => {
-    const { total, ...semTotal } = municipioValido;
+    const { totalPeriodoCompleto, ...semTotal } = municipioValido;
     expect(validarMunicipio(semTotal)).toBe(false);
     const { ranking, ...semRanking } = municipioValido;
     expect(validarMunicipio(semRanking)).toBe(false);
@@ -52,9 +56,16 @@ describe('validarMunicipio', () => {
   });
 
   it('rejeita quando um campo tem tipo errado', () => {
-    expect(validarMunicipio({ ...municipioValido, total: '18' })).toBe(false);
+    expect(validarMunicipio({ ...municipioValido, uf: 42 })).toBe(false);
+    expect(validarMunicipio({ ...municipioValido, totalPeriodoCompleto: '298' })).toBe(false);
+    expect(validarMunicipio({ ...municipioValido, totalUltimas2Semanas: '34' })).toBe(false);
+    expect(validarMunicipio({ ...municipioValido, amostraSemanalPequena: 'false' })).toBe(false);
     expect(validarMunicipio({ ...municipioValido, porHora: 'não é array' })).toBe(false);
     expect(validarMunicipio({ ...municipioValido, porHora: [1, 2, 'x'] })).toBe(false);
+    expect(validarMunicipio({ ...municipioValido, porDia: 'não é array' })).toBe(false);
+    expect(validarMunicipio({ ...municipioValido, variacaoSemanaPct: 'oito' })).toBe(false);
+    expect(validarMunicipio({ ...municipioValido, pico: 42 })).toBe(false);
+    expect(validarMunicipio({ ...municipioValido, pontos: 'não é array' })).toBe(false);
     expect(validarMunicipio({ ...municipioValido, simulado: 'false' })).toBe(false);
     expect(validarMunicipio({ ...municipioValido, ranking: { tipo: 'via', itens: 'não é array' } })).toBe(false);
     expect(validarMunicipio({ ...municipioValido, ranking: { tipo: 'via', itens: [{ nome: 'Rua A', pct: 'cinquenta' }] } })).toBe(false);
@@ -66,8 +77,8 @@ describe('validarMunicipio', () => {
   });
 
   it('rejeita NaN/Infinity em campos numéricos', () => {
-    expect(validarMunicipio({ ...municipioValido, total: NaN })).toBe(false);
-    expect(validarMunicipio({ ...municipioValido, total: Infinity })).toBe(false);
+    expect(validarMunicipio({ ...municipioValido, totalPeriodoCompleto: NaN })).toBe(false);
+    expect(validarMunicipio({ ...municipioValido, totalPeriodoCompleto: Infinity })).toBe(false);
   });
 });
 
@@ -162,5 +173,11 @@ describe('carregarIndice', () => {
     global.fetch = vi.fn().mockResolvedValue({ status: 404, ok: false });
     const r = await carregarIndice();
     expect(r).toEqual({ ok: false, motivo: 'indisponivel' });
+  });
+
+  it('erro de rede (fetch rejeita) passa o motivo "rede" direto, sem reescrever pra "indisponivel"', async () => {
+    global.fetch = vi.fn().mockRejectedValue(new TypeError('Failed to fetch'));
+    const r = await carregarIndice();
+    expect(r).toEqual({ ok: false, motivo: 'rede' });
   });
 });

@@ -2,10 +2,12 @@
   "ibge": "3516804",
   "nome": "Gastão Vidigal",
   "uf": "SP",
-  "fonte": "Infosiga-SP — últimas 2 semanas completas disponíveis no extrato",
-  "periodo": "20 set 2026 – 26 set 2026",
+  "fonte": "Infosiga-SP: sinistros com vítimas (fatais e não fatais)",
+  "periodo": "20 set 2026 a 26 set 2026",
   "simulado": false,
-  "total": 0,
+  "totalPeriodoCompleto": 21,
+  "totalUltimas2Semanas": 0,
+  "amostraSemanalPequena": true,
   "porHora": [
     1,
     2,
@@ -26,7 +28,7 @@
     0,
     0
   ],
-  "variacaoSemanaPct": 0,
+  "variacaoSemanaPct": null,
   "pico": "14h",
   "ranking": {
     "tipo": "via",

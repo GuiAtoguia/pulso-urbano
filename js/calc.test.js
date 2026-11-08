@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { scaleHeat, formatVariacaoPct, topVias, buildWeekPath, raioPonto, buildLegendaPontos, classificarPonto } from './calc.js';
+import { scaleHeat, formatVariacaoPct, fimDoPeriodo, topVias, buildWeekPath, raioPonto, buildLegendaPontos, classificarPonto } from './calc.js';
 
 describe('scaleHeat', () => {
   it('escala um valor dentro da faixa para 0-100', () => {
@@ -22,6 +22,21 @@ describe('scaleHeat', () => {
   });
   it('retorna 0 quando valor não é finito', () => {
     expect(scaleHeat(NaN, 100)).toBe(0);
+  });
+});
+
+describe('fimDoPeriodo', () => {
+  it('extrai a data final de um período "início a fim"', () => {
+    expect(fimDoPeriodo('20 set 2026 a 26 set 2026')).toBe('26 set 2026');
+  });
+  it('retorna null para período ausente, vazio ou de tipo errado', () => {
+    expect(fimDoPeriodo(null)).toBeNull();
+    expect(fimDoPeriodo(undefined)).toBeNull();
+    expect(fimDoPeriodo('')).toBeNull();
+    expect(fimDoPeriodo(42)).toBeNull();
+  });
+  it('retorna null quando a parte final, depois de split, fica vazia ao aparar espaços', () => {
+    expect(fimDoPeriodo('20 set 2026 a ')).toBeNull();
   });
 });
 
@@ -85,15 +100,15 @@ describe('raioPonto', () => {
     expect(rMeio).toBeCloseTo(70.7, 0);
   });
   it('satura no mínimo quando n é 0, negativo ou não numérico', () => {
-    expect(raioPonto(0, 100)).toBe(6);
-    expect(raioPonto(-5, 100)).toBe(6);
-    expect(raioPonto(NaN, 100)).toBe(6);
-    expect(raioPonto(undefined, 100)).toBe(6);
+    expect(raioPonto(0, 100)).toBe(4);
+    expect(raioPonto(-5, 100)).toBe(4);
+    expect(raioPonto(NaN, 100)).toBe(4);
+    expect(raioPonto(undefined, 100)).toBe(4);
   });
   it('retorna min quando maxN é inválido', () => {
-    expect(raioPonto(10, 0)).toBe(6);
-    expect(raioPonto(10, -1)).toBe(6);
-    expect(raioPonto(10, NaN)).toBe(6);
+    expect(raioPonto(10, 0)).toBe(4);
+    expect(raioPonto(10, -1)).toBe(4);
+    expect(raioPonto(10, NaN)).toBe(4);
   });
   it('não excede o maxN ao calcular a escala (clamp)', () => {
     expect(raioPonto(500, 100, { min: 6, max: 22 })).toBe(22);
@@ -147,6 +162,14 @@ describe('classificarPonto', () => {
   });
   it('retorna a primeira faixa para n não numérico', () => {
     expect(classificarPonto(NaN, legenda)).toBe(legenda[0]);
+  });
+  it('a cor/faixa de cada ponto (classificarPonto) nunca diverge da legenda construída a partir do mesmo pontos[] (ver desenharPontos/legendaMapaHTML em app.js)', () => {
+    const pontos = [{ n: 1 }, { n: 5 }, { n: 34 }, { n: 42 }, { n: 8 }, { n: 209 }];
+    const legendaDoConjunto = buildLegendaPontos(pontos);
+    for (const p of pontos) {
+      const faixa = classificarPonto(p.n, legendaDoConjunto);
+      expect(legendaDoConjunto).toContain(faixa); // nunca uma faixa "de fora" da legenda mostrada
+    }
   });
 });
 
@@ -223,6 +246,6 @@ describe('cenário total 0 / arrays zerados (sem NaN, sem divisão por zero)', (
 
   it('buildLegendaPontos e raioPonto com pontos:[] (sem coordenada nenhuma) não lançam', () => {
     expect(buildLegendaPontos([])).toEqual([]);
-    expect(raioPonto(0, 0)).toBe(6);
+    expect(raioPonto(0, 0)).toBe(4);
   });
 });

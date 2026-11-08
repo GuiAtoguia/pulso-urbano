@@ -2,10 +2,12 @@
   "ibge": "3537701",
   "nome": "Piacatu",
   "uf": "SP",
-  "fonte": "Infosiga-SP — últimas 2 semanas completas disponíveis no extrato",
-  "periodo": "20 set 2026 – 26 set 2026",
+  "fonte": "Infosiga-SP: sinistros com vítimas (fatais e não fatais)",
+  "periodo": "20 set 2026 a 26 set 2026",
   "simulado": false,
-  "total": 0,
+  "totalPeriodoCompleto": 38,
+  "totalUltimas2Semanas": 1,
+  "amostraSemanalPequena": true,
   "porHora": [
     2,
     2,
@@ -26,7 +28,7 @@
     0,
     0
   ],
-  "variacaoSemanaPct": -100,
+  "variacaoSemanaPct": null,
   "pico": "10h",
   "ranking": {
     "tipo": "via",

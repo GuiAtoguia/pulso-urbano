@@ -8,7 +8,8 @@
 
 import { topVias } from './calc.js';
 
-export const TOTAL_MINIMO_RANKING = 20;
+export const TOTAL_MINIMO_RANKING = 20; // mínimo no período completo (ver scripts/gerar-dados.js)
+export const TOTAL_MINIMO_VARIACAO = 30; // mínimo nas 2 últimas semanas somadas (idem)
 const LIMIAR_ESTAVEL = 1; // |variação| < 1% é tratada como estável
 
 const TEMPLATES_PICO = [
@@ -86,8 +87,14 @@ function faixaHorario(pico) {
   };
 }
 
-// Frase sobre o horário de maior concentração de sinistros.
+// Frase sobre o horário de maior concentração de sinistros. Mesmo limiar do
+// ranking (TOTAL_MINIMO_RANKING sobre totalPeriodoCompleto, mesmo universo de
+// porHora) — com poucos sinistros no histórico, um "pico" é só ruído estatístico.
 export function frasePico(dados) {
+  const total = Number(dados?.totalPeriodoCompleto);
+  if (!Number.isFinite(total) || total < TOTAL_MINIMO_RANKING) {
+    return 'dados insuficientes para identificar horário de pico';
+  }
   const faixa = faixaHorario(dados?.pico);
   if (!faixa) return 'sem horário de pico identificado para este município';
   const indice = escolherIndice(dados?.ibge, 'pico', TEMPLATES_PICO.length);
@@ -95,20 +102,25 @@ export function frasePico(dados) {
 }
 
 // Frase sobre a via com mais sinistros. Com poucos dados, o ranking não é confiável.
+// O limiar vale pro período completo (mesmo universo do ranking), nunca pra janela de 2 semanas.
 export function fraseVia(dados) {
-  const total = Number(dados?.total);
+  const total = Number(dados?.totalPeriodoCompleto);
   const itens = dados?.ranking?.itens;
   if (!Number.isFinite(total) || total < TOTAL_MINIMO_RANKING || !Array.isArray(itens) || itens.length === 0) {
     return 'dados insuficientes para ranking';
   }
+  // itens.length >= 1 nesse ponto (garantido pelo guard acima) — topVias(itens, 1) sempre devolve 1 item.
   const [principal] = topVias(itens, 1);
-  if (!principal) return 'dados insuficientes para ranking';
   const indice = escolherIndice(dados?.ibge, 'via', TEMPLATES_VIA.length);
   return preencher(TEMPLATES_VIA[indice], { via: principal.nome, pct: principal.pct });
 }
 
-// Frase sobre a variação semanal (positiva, negativa ou estável).
+// Frase sobre a variação semanal (positiva, negativa ou estável). Com amostra
+// pequena (menos de TOTAL_MINIMO_VARIACAO sinistros nas 2 últimas semanas somadas),
+// nunca fala em aumento/queda — a flag vem pronta do gerar-dados.js (mesmo cálculo
+// que zera variacaoSemanaPct nesse caso, então as duas nunca divergem).
 export function fraseVariacao(dados) {
+  if (dados?.amostraSemanalPequena) return 'amostra pequena para avaliar a variação semanal';
   const bruto = dados?.variacaoSemanaPct;
   if (bruto === null || bruto === undefined) return 'sem dados de variação semanal para este município';
   const valor = Number(bruto);

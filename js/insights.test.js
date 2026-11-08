@@ -7,7 +7,9 @@ function municipio(sobrescritas = {}) {
     nome: 'Araçatuba',
     uf: 'SP',
     simulado: true,
-    total: 298,
+    totalPeriodoCompleto: 298,
+    totalUltimas2Semanas: 34,
+    amostraSemanalPequena: false,
     pico: '18h',
     variacaoSemanaPct: -4.4,
     ranking: {
@@ -38,6 +40,10 @@ describe('frasePico', () => {
     expect(frasePico(d)).toBe(frasePico(d));
     expect(frasePico(d)).toBe(frasePico(municipio()));
   });
+  it('não lança e ainda monta uma frase quando ibge está ausente (sem município pra chavear o índice)', () => {
+    expect(() => frasePico(municipio({ ibge: undefined }))).not.toThrow();
+    expect(frasePico(municipio({ ibge: undefined }))).toMatch(/18h|20h/);
+  });
   it('varia a frase entre municípios diferentes (cobre as 4 variações)', () => {
     const frases = new Set(
       ['3502804', '3550308', '3509502', '3501608', '3505708', '3503208', '3515103', '3522208'].map(ibge =>
@@ -46,10 +52,21 @@ describe('frasePico', () => {
     );
     expect(frases.size).toBeGreaterThan(1);
   });
-  it('retorna um aviso quando "pico" está ausente ou inválido', () => {
+  it('retorna um aviso quando "pico" está ausente ou inválido (amostra suficiente)', () => {
     expect(frasePico(municipio({ pico: null }))).toBe('sem horário de pico identificado para este município');
     expect(frasePico(municipio({ pico: 'abc' }))).toBe('sem horário de pico identificado para este município');
-    expect(frasePico({})).toBe('sem horário de pico identificado para este município');
+  });
+  it('retorna o mesmo aviso quando "pico" tem formato válido mas hora fora de 0-23', () => {
+    expect(frasePico(municipio({ pico: '25h' }))).toBe('sem horário de pico identificado para este município');
+    expect(frasePico(municipio({ pico: '99h' }))).toBe('sem horário de pico identificado para este município');
+  });
+  it('avisa dados insuficientes quando o total do período completo é menor que 20', () => {
+    expect(frasePico(municipio({ totalPeriodoCompleto: 19 }))).toBe('dados insuficientes para identificar horário de pico');
+    expect(frasePico(municipio({ totalPeriodoCompleto: 0 }))).toBe('dados insuficientes para identificar horário de pico');
+    expect(frasePico({})).toBe('dados insuficientes para identificar horário de pico');
+  });
+  it('considera 20 como suficiente (limite inclusivo)', () => {
+    expect(frasePico(municipio({ totalPeriodoCompleto: 20 }))).not.toBe('dados insuficientes para identificar horário de pico');
   });
 });
 
@@ -72,12 +89,16 @@ describe('fraseVia', () => {
     );
     expect(frases.size).toBeGreaterThan(1);
   });
-  it('avisa dados insuficientes quando o total é menor que 20', () => {
-    expect(fraseVia(municipio({ total: 19 }))).toBe('dados insuficientes para ranking');
-    expect(fraseVia(municipio({ total: 0 }))).toBe('dados insuficientes para ranking');
+  it('avisa dados insuficientes quando o total do período completo é menor que 20', () => {
+    expect(fraseVia(municipio({ totalPeriodoCompleto: 19 }))).toBe('dados insuficientes para ranking');
+    expect(fraseVia(municipio({ totalPeriodoCompleto: 0 }))).toBe('dados insuficientes para ranking');
   });
   it('considera 20 como suficiente (limite inclusivo)', () => {
-    expect(fraseVia(municipio({ total: 20 }))).not.toBe('dados insuficientes para ranking');
+    expect(fraseVia(municipio({ totalPeriodoCompleto: 20 }))).not.toBe('dados insuficientes para ranking');
+  });
+  it('usa o total do período completo, não o das últimas 2 semanas', () => {
+    // poucos sinistros nas últimas 2 semanas, mas ranking confiável no histórico completo
+    expect(fraseVia(municipio({ totalPeriodoCompleto: 298, totalUltimas2Semanas: 3 }))).not.toBe('dados insuficientes para ranking');
   });
   it('avisa dados insuficientes quando não há itens de ranking', () => {
     expect(fraseVia(municipio({ ranking: { tipo: 'via', itens: [] } }))).toBe('dados insuficientes para ranking');
@@ -122,6 +143,15 @@ describe('fraseVariacao', () => {
     expect(fraseVariacao(municipio({ variacaoSemanaPct: null }))).toBe('sem dados de variação semanal para este município');
     expect(fraseVariacao({})).toBe('sem dados de variação semanal para este município');
   });
+  it('retorna o mesmo aviso quando a variação não é null/undefined mas também não é um número (NaN)', () => {
+    expect(fraseVariacao(municipio({ variacaoSemanaPct: 'oito' }))).toBe('sem dados de variação semanal para este município');
+    expect(fraseVariacao(municipio({ variacaoSemanaPct: NaN }))).toBe('sem dados de variação semanal para este município');
+  });
+  it('com amostraSemanalPequena, nunca fala em aumento/queda, mesmo se variacaoSemanaPct vier preenchida', () => {
+    const frase = fraseVariacao(municipio({ amostraSemanalPequena: true, variacaoSemanaPct: 50 }));
+    expect(frase).toBe('amostra pequena para avaliar a variação semanal');
+    expect(frase).not.toMatch(/aumento|queda|cresc|redu|alta/i);
+  });
 });
 
 describe('gerarInsights', () => {
@@ -132,5 +162,29 @@ describe('gerarInsights', () => {
       via: fraseVia(d),
       variacao: fraseVariacao(d),
     });
+  });
+});
+
+// Regressão (P13b item 8): com amostra insuficiente, nenhuma das 3 frases pode
+// afirmar tendência, pico ou ranking — só avisar que faltam dados.
+describe('nenhuma frase afirma tendência/pico/ranking quando a amostra não sustenta', () => {
+  const PALAVRAS_DE_AFIRMACAO = /aumento|queda|cresc|redu|alta|concentra o maior|horário de maior|horário de risco|atenção redobrada|lidera/i;
+
+  it('período completo pequeno (<20): nem pico nem via afirmam nada, só avisam dados insuficientes', () => {
+    const d = municipio({ totalPeriodoCompleto: 6, totalUltimas2Semanas: 0, amostraSemanalPequena: true });
+    const insights = gerarInsights(d);
+    expect(insights.pico).toBe('dados insuficientes para identificar horário de pico');
+    expect(insights.via).toBe('dados insuficientes para ranking');
+    expect(insights.pico).not.toMatch(PALAVRAS_DE_AFIRMACAO);
+    expect(insights.via).not.toMatch(PALAVRAS_DE_AFIRMACAO);
+  });
+
+  it('amostra semanal pequena (<30 nas 2 últimas semanas): variação não afirma aumento/queda, mesmo com período completo grande', () => {
+    const d = municipio({ amostraSemanalPequena: true, variacaoSemanaPct: null });
+    const insights = gerarInsights(d);
+    expect(insights.variacao).not.toMatch(PALAVRAS_DE_AFIRMACAO);
+    // período completo ainda é suficiente, então pico e via continuam afirmando normalmente
+    expect(insights.pico).not.toBe('dados insuficientes para identificar horário de pico');
+    expect(insights.via).not.toBe('dados insuficientes para ranking');
   });
 });

@@ -2,10 +2,12 @@
   "ibge": "3532108",
   "nome": "Murutinga do Sul",
   "uf": "SP",
-  "fonte": "Infosiga-SP — últimas 2 semanas completas disponíveis no extrato",
-  "periodo": "20 set 2026 – 26 set 2026",
+  "fonte": "Infosiga-SP: sinistros com vítimas (fatais e não fatais)",
+  "periodo": "20 set 2026 a 26 set 2026",
   "simulado": false,
-  "total": 0,
+  "totalPeriodoCompleto": 23,
+  "totalUltimas2Semanas": 1,
+  "amostraSemanalPequena": true,
   "porHora": [
     1,
     1,
@@ -26,7 +28,7 @@
     0,
     0
   ],
-  "variacaoSemanaPct": -100,
+  "variacaoSemanaPct": null,
   "pico": "14h",
   "ranking": {
     "tipo": "via",

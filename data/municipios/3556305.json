@@ -2,10 +2,12 @@
   "ibge": "3556305",
   "nome": "Valparaíso",
   "uf": "SP",
-  "fonte": "Infosiga-SP — últimas 2 semanas completas disponíveis no extrato",
-  "periodo": "20 set 2026 – 26 set 2026",
+  "fonte": "Infosiga-SP: sinistros com vítimas (fatais e não fatais)",
+  "periodo": "20 set 2026 a 26 set 2026",
   "simulado": false,
-  "total": 1,
+  "totalPeriodoCompleto": 182,
+  "totalUltimas2Semanas": 5,
+  "amostraSemanalPequena": true,
   "porHora": [
     12,
     10,
@@ -26,7 +28,7 @@
     0,
     0
   ],
-  "variacaoSemanaPct": -75,
+  "variacaoSemanaPct": null,
   "pico": "18h",
   "ranking": {
     "tipo": "via",

@@ -159,6 +159,7 @@ table.sr-only{position:fixed;left:-9999px;top:-9999px;width:auto;height:auto;mar
 .pu-soft-heat{display:grid;grid-template-columns:repeat(9,1fr);gap:6px}
 .pu-soft-tile{height:36px;border-radius:12px;background:color-mix(in srgb,var(--accent) calc(var(--heat)*.56%), var(--surface-3));transition:transform .26s ease}
 .pu-soft-tile:hover{transform:translateY(-3px)}
+.pu-soft-tile.is-pico{box-shadow:inset 0 0 0 2px var(--accent)}
 .pu-heat-labels{display:flex;justify-content:space-between;color:var(--muted);font-size:0.5625rem;font-weight:700;margin-top:9px}
 .pu-heat-widget{min-height:226px}
 
@@ -293,7 +294,9 @@ html[data-mode="dark"] .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) br
 .pu-footer-primary{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:11px;width:100%}
 .pu-footer-primary .pu-foot-links{margin:0 auto}
 .pu-foot-links{width:100%;display:flex;gap:8px 20px;align-items:center;justify-content:center;flex-wrap:wrap}
-.pu-foot-links span{font-size:0.625rem;color:var(--muted);font-weight:700;display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+.pu-foot-links span,.pu-foot-links button{font-size:0.625rem;color:var(--muted);font-weight:700;display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+.pu-foot-links button{background:none;border:none;padding:0;font-family:inherit;cursor:pointer}
+.pu-foot-links button:hover{color:var(--text)}
 .pu-foot-links svg{width:15px;height:15px;color:var(--accent)}
 .pu-footer-secondary{border-top:1px solid var(--line);padding-top:11px;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:5px 25px}
 .pu-footer-secondary span{display:inline-flex;gap:6px;align-items:center;color:var(--muted);font-weight:650;font-size:0.5625rem}
@@ -366,7 +369,7 @@ html{scrollbar-width:thin;scrollbar-color:var(--accent) var(--bg)}
   .pu-navigation span{font-size:0.5625rem;padding:8px 8px}
   .pu-footer{padding:15px 10px 12px;gap:10px}
   .pu-foot-links{gap:9px 13px}
-  .pu-foot-links span{font-size:0.5625rem}
+  .pu-foot-links span,.pu-foot-links button{font-size:0.5625rem}
   .pu-footer-secondary{gap:7px 13px}
   .pu-footer-secondary span{font-size:0.5rem}
 }

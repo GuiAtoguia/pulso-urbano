@@ -62,6 +62,13 @@ describe('buscarClima', () => {
     expect(resultado.motivo).toBe('invalido');
   });
 
+  it('retorna motivo invalido quando o JSON vem malformado (res.json() rejeita)', async () => {
+    global.fetch = vi.fn().mockResolvedValue({ ok: true, json: () => Promise.reject(new SyntaxError('bad json')) });
+    const resultado = await buscarClima(-21.25, -50.69);
+    expect(resultado.ok).toBe(false);
+    expect(resultado.motivo).toBe('invalido');
+  });
+
   it('retorna ok:false para coordenadas inválidas sem chamar fetch', async () => {
     global.fetch = vi.fn();
     const resultado = await buscarClima(NaN, undefined);
