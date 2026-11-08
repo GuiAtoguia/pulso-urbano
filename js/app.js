@@ -5,6 +5,7 @@
 
 import { scaleHeat, formatVariacaoPct, topVias, buildWeekPath } from './calc.js';
 import { carregarMunicipio } from './data.js';
+import { gerarInsights } from './insights.js';
 
 const escapeHTML = t => String(t).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
@@ -85,18 +86,23 @@ function softWeather() {
   return widget('Clima da região', 'cloud-sun', `<div class="pu-weather-main"><div><strong>32°</strong><span>Parcialmente nublado</span></div><div class="pu-weather-icon"><i data-lucide="cloud-sun"></i></div></div><div class="pu-weather-days"><span><b>Sex</b>35°</span><span><b>Sáb</b>36°</span><span><b>Dom</b>31°</span><span><b>Seg</b>29°</span></div><div class="pu-widget-foot">Exemplo visual • não é medição ao vivo</div>`, 'pu-weather-widget');
 }
 
-function overviewWidget() {
+function overviewWidget(dados) {
+  const insights = dados ? gerarInsights(dados) : null;
+  const semDadosTexto = municipioData.status === 'carregando' ? 'carregando dados…' : 'sem dados para este município';
+  const resumo = dados
+    ? `${Number.isFinite(dados.total) ? dados.total : '—'} sinistros registrados no período de ${escapeHTML(dados.periodo ?? '—')}, segundo ${escapeHTML(dados.fonte ?? 'fonte não informada')}.`
+    : semDadosTexto;
   return widget('Visão geral', 'notebook-tabs', `
     <div class="pu-overview-layout">
       <div class="pu-overview-main">
         <div class="pu-overview-eyebrow"><i data-lucide="sparkles"></i> Síntese da região</div>
         <h3 class="pu-overview-title">${escapeHTML(region.name)} em perspectiva</h3>
-        <p class="pu-overview-desc">Área dedicada ao futuro resumo inteligente: informações principais do território, padrões de deslocamento, mudanças ao longo do dia e observações sobre as condições locais. Os conteúdos apresentados nesta prévia são demonstrativos.</p>
+        <p class="pu-overview-desc">${resumo}</p>
       </div>
       <div class="pu-overview-side">
-        <div><i data-lucide="clock-3"></i><span>Maior movimentação ilustrativa <b>17h–20h</b></span></div>
-        <div><i data-lucide="cloud-sun"></i><span>Condição de referência <b>Calor e nebulosidade</b></span></div>
-        <div><i data-lucide="map-pinned"></i><span>Recorte territorial <b>${escapeHTML(region.name)} · ${escapeHTML(region.uf)}</b></span></div>
+        <div><i data-lucide="clock-3"></i><span>${insights ? escapeHTML(insights.pico) : escapeHTML(semDadosTexto)}</span></div>
+        <div><i data-lucide="route"></i><span>${insights ? escapeHTML(insights.via) : escapeHTML(semDadosTexto)}</span></div>
+        <div><i data-lucide="chart-spline"></i><span>${insights ? escapeHTML(insights.variacao) : escapeHTML(semDadosTexto)}</span></div>
       </div>
     </div>`, 'pu-overview-widget');
 }
@@ -131,7 +137,7 @@ function renderAppContent() {
         <div class="pu-grid-bottom">${trendWidget(dados)}${heatWidget(dados)}</div>
       </div>
     </div>
-    <div class="pu-overview-last">${overviewWidget()}</div>
+    <div class="pu-overview-last">${overviewWidget(dados)}</div>
   </section>${demoFooter()}</div>`;
 }
 
