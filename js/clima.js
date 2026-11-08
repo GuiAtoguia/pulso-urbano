@@ -6,7 +6,8 @@ const TIMEOUT_MS = 8000;
 const TIMEZONE = 'America/Sao_Paulo';
 const FONTE = 'Open-Meteo (CC-BY 4.0)';
 
-const cache = new Map(); // chave "lat,lon" arredondado -> previsão
+const cache = new Map(); // chave 'lat,lon' -> {valor, expiraEm}, previsão atualizada no retorno à cidade
+const CACHE_TTL_MS = 15 * 60 * 1000;
 
 // Códigos WMO usados pelo Open-Meteo (tabela oficial em open-meteo.com/en/docs).
 const WEATHER_CODES = {
@@ -58,7 +59,9 @@ function chaveCache(lat, lon) {
 export async function buscarClima(lat, lon) {
   if (!Number.isFinite(lat) || !Number.isFinite(lon)) return { ok: false, motivo: 'sem-coordenadas' };
   const chave = chaveCache(lat, lon);
-  if (cache.has(chave)) return cache.get(chave);
+  const mem = cache.get(chave);
+  if (mem && Date.now() < mem.expiraEm) return mem.valor;
+  if (mem) cache.delete(chave);
 
   const params = new URLSearchParams({
     latitude: lat,
@@ -107,6 +110,6 @@ export async function buscarClima(lat, lon) {
     return { ok: false, motivo };
   }
 
-  cache.set(chave, resultado);
+  cache.set(chave, { valor: resultado, expiraEm: Date.now() + CACHE_TTL_MS });
   return resultado;
 }

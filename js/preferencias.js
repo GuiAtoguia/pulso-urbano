@@ -11,7 +11,10 @@ export const CHAVE_TEMA = 'pulso-urbano-tema';
 export const CHAVE_REGIAO = 'pulso-urbano-regiao';
 
 function storagePadrao() {
-  return typeof localStorage === 'undefined' ? undefined : localStorage;
+  // A propriedade localStorage pode lançar SecurityError antes de qualquer getItem
+  // (iframes restritos, páginas locais e políticas de privacidade do navegador).
+  try { return typeof window !== 'undefined' ? window.localStorage : undefined; }
+  catch { return undefined; }
 }
 
 export function lerTemaSalvo(storage = storagePadrao()) {

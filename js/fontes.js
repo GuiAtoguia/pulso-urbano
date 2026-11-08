@@ -12,7 +12,7 @@ const LINK_ATTRS = 'target="_blank" rel="noopener noreferrer"';
 function secaoDados(dados) {
   if (!dados) {
     return `<section class="fontes-secao" aria-labelledby="fontesSecaoDados">
-      <h3 id="fontesSecaoDados">1. Dados de sinistros</h3>
+      <h3 id="fontesSecaoDados">Dados de sinistros</h3>
       <p>Os sinistros vêm do <strong>Infosiga-SP / Detran-SP</strong>, sob licença
       <strong>CC BY 4.0</strong> (<a href="https://infosiga.detran.sp.gov.br" ${LINK_ATTRS}>infosiga.detran.sp.gov.br</a>).</p>
       <p>Nenhum dado está carregado para o município atual no momento: período e
@@ -27,7 +27,7 @@ function secaoDados(dados) {
     : '';
 
   return `<section class="fontes-secao" aria-labelledby="fontesSecaoDados">
-    <h3 id="fontesSecaoDados">1. Dados de sinistros</h3>
+    <h3 id="fontesSecaoDados">Dados de sinistros</h3>
     <p>Os sinistros vêm do <strong>Infosiga-SP / Detran-SP</strong>, sob licença
     <strong>CC BY 4.0</strong> (<a href="https://infosiga.detran.sp.gov.br" ${LINK_ATTRS}>infosiga.detran.sp.gov.br</a>).</p>
     <dl class="fontes-lista-definicao">
@@ -40,7 +40,7 @@ function secaoDados(dados) {
 
 function secaoMetodologia() {
   return `<section class="fontes-secao" aria-labelledby="fontesSecaoMetodologia">
-    <h3 id="fontesSecaoMetodologia">2. Metodologia</h3>
+    <h3 id="fontesSecaoMetodologia">Critérios de leitura</h3>
     <ul class="fontes-lista">
       <li><strong>Ranking por via, não por bairro</strong>: a base do Infosiga-SP
       não traz coluna de bairro, só o logradouro (rua/avenida) onde o sinistro
@@ -67,9 +67,6 @@ function secaoMetodologia() {
       <li><strong>O que é contado</strong>: sinistros classificados como fatais
       ou não fatais pelo Infosiga-SP. Notificações preliminares, sem gravidade
       ainda classificada, não entram na contagem.</li>
-      <li><strong>Insights automáticos</strong> (os textos curtos na seção
-      "Visão geral") são gerados por regras fixas de comparação de números
-      (não há IA generativa rodando em tempo real para interpretar os dados).</li>
       <li><strong>Acessibilidade</strong>: link "Pular para o conteúdo" no
       topo da página, foco de teclado visível em todos os controles,
       mudanças de dados anunciadas a leitores de tela (regiões
@@ -83,7 +80,7 @@ function secaoMetodologia() {
 
 function secaoClima() {
   return `<section class="fontes-secao" aria-labelledby="fontesSecaoClima">
-    <h3 id="fontesSecaoClima">3. Clima</h3>
+    <h3 id="fontesSecaoClima">Clima</h3>
     <p>A previsão vem da <strong>Open-Meteo</strong>
     (<a href="https://open-meteo.com" ${LINK_ATTRS}>open-meteo.com</a>), sob licença
     <strong>CC BY 4.0</strong>, de uso gratuito para fins não comerciais (o caso
@@ -93,14 +90,13 @@ function secaoClima() {
 
 function secaoBibliotecas() {
   return `<section class="fontes-secao" aria-labelledby="fontesSecaoBibliotecas">
-    <h3 id="fontesSecaoBibliotecas">4. Bibliotecas e serviços</h3>
+    <h3 id="fontesSecaoBibliotecas">Bibliotecas e serviços</h3>
     <ul class="fontes-lista">
       <li><a href="https://leafletjs.com" ${LINK_ATTRS}>Leaflet 1.9.4</a>: biblioteca de mapas.</li>
-      <li><a href="https://www.openstreetmap.org/copyright" ${LINK_ATTRS}>OpenStreetMap</a>: tiles do mapa, © colaboradores do OpenStreetMap, licença ODbL.</li>
+      <li><a href="https://www.openstreetmap.org/copyright" ${LINK_ATTRS}>OpenStreetMap</a>: mapa-base e créditos dos colaboradores, conforme ODbL e política de tiles. A cartografia é carregada sob demanda.</li>
       <li><a href="https://lucide.dev" ${LINK_ATTRS}>Lucide</a>: ícones.</li>
       <li><a href="https://fonts.google.com/specimen/Montserrat" ${LINK_ATTRS}>Montserrat</a>: fonte, via Google Fonts.</li>
-      <li><a href="https://servicodados.ibge.gov.br/api/docs/localidades" ${LINK_ATTRS}>API de localidades do IBGE</a>: lista de estados e municípios.</li>
-      <li><a href="https://nominatim.org" ${LINK_ATTRS}>Nominatim</a>: usado só para encontrar as coordenadas da cidade escolhida, quando ainda não as temos.</li>
+      <li><a href="https://servicodados.ibge.gov.br/api/docs/localidades" ${LINK_ATTRS}>IBGE</a>: códigos oficiais dos municípios exibidos no índice estático do projeto.</li>
       <li><a href="https://vitest.dev" ${LINK_ATTRS}>Vitest</a>: testes automatizados (roda só em desenvolvimento, não faz parte do site publicado).</li>
     </ul>
   </section>`;
@@ -108,7 +104,7 @@ function secaoBibliotecas() {
 
 function secaoIA() {
   return `<section class="fontes-secao" aria-labelledby="fontesSecaoIA">
-    <h3 id="fontesSecaoIA">5. Uso de IA</h3>
+    <h3 id="fontesSecaoIA">Sobre o desenvolvimento</h3>
     <p>O código deste projeto foi desenvolvido com apoio do
     <strong>Claude Code</strong> (Anthropic). Os números mostrados no site vêm dos
     dados oficiais listados acima. Não são gerados nem alterados por IA.</p>
@@ -117,6 +113,24 @@ function secaoIA() {
 
 // dados: o JSON do município selecionado (ver data/municipios/<ibge>.json), ou
 // null/undefined quando o município não tem arquivo. Nunca lança.
+// As informações técnicas continuam acessíveis diretamente na página Fontes,
+// mas ficam em cartões Material You expansíveis para preservar a leitura compacta.
+// Somente a base do município inicia expandida; todos os demais detalhes podem
+// ser abertos por mouse, toque ou teclado usando <details>/<summary> nativos.
 export function montarConteudoFontes(dados) {
-  return [secaoDados(dados), secaoMetodologia(), secaoClima(), secaoBibliotecas(), secaoIA()].join('\n');
+  const blocos = [
+    [secaoDados(dados), 'database', 'Dados de sinistros e período'],
+    [secaoMetodologia(), 'list-checks', 'Critérios de cálculo'],
+    [secaoClima(), 'cloud-sun', 'Previsão meteorológica'],
+    [secaoBibliotecas(), 'layers-3', 'Serviços e licenças'],
+    [secaoIA(), 'code-2', 'Sobre o desenvolvimento'],
+  ];
+  return blocos.map(([html, icone, titulo], indice) => {
+    const fimCabecalho = html.indexOf('</h3>');
+    const conteudo = html.slice(fimCabecalho + 5).replace(/<\/section>\s*$/, '');
+    return `<details class="fontes-secao pu-method-detail" ${indice === 0 ? 'open' : ''}>
+      <summary class="pu-method-summary"><span class="pu-method-summary-icon"><i data-lucide="${icone}"></i></span><span><strong>${titulo}</strong><small>${['Base e janela do extrato selecionado','Como são calculados os indicadores','Diferença entre previsão e registros históricos','Créditos e direitos de uso','Como o projeto foi construído'][indice]}</small></span><i data-lucide="chevron-down" class="pu-method-chevron"></i></summary>
+      <div class="pu-method-content">${conteudo}</div>
+    </details>`;
+  }).join('\n');
 }

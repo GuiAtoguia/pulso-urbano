@@ -7,7 +7,8 @@
     "gerar-dados": "node scripts/gerar-dados.js",
     "verificar-totais": "node scripts/verificar-totais.js",
     "test": "vitest run",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "verificar-ui-dados": "node scripts/verificar-redesign-v15.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.14.0",

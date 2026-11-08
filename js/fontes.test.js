@@ -20,10 +20,10 @@ describe('montarConteudoFontes', () => {
   it('município sem arquivo: mostra aviso de que não há dados carregados, mas mantém as seções estáticas', () => {
     const html = montarConteudoFontes(null);
     expect(html).toContain('Nenhum dado está carregado');
-    expect(html).toContain('2. Metodologia');
-    expect(html).toContain('3. Clima');
-    expect(html).toContain('4. Bibliotecas e serviços');
-    expect(html).toContain('5. Uso de IA');
+    expect(html).toContain('Critérios de cálculo');
+    expect(html).toContain('Previsão meteorológica');
+    expect(html).toContain('Serviços e licenças');
+    expect(html).toContain('Sobre o desenvolvimento');
   });
 
   it('mostra periodo e fonte vindos do JSON, sem valores fixos', () => {
@@ -65,7 +65,7 @@ describe('montarConteudoFontes', () => {
 
   it('sempre inclui as 5 seções, nessa ordem, quando há dados', () => {
     const html = montarConteudoFontes(municipioBase);
-    const posicoes = ['1. Dados de sinistros', '2. Metodologia', '3. Clima', '4. Bibliotecas e serviços', '5. Uso de IA'].map(t => html.indexOf(t));
+    const posicoes = ['Dados de sinistros e período', 'Critérios de cálculo', 'Previsão meteorológica', 'Serviços e licenças', 'Sobre o desenvolvimento'].map(t => html.indexOf(t));
     expect(posicoes.every(p => p >= 0)).toBe(true);
     expect(posicoes).toEqual([...posicoes].sort((a, b) => a - b));
   });
