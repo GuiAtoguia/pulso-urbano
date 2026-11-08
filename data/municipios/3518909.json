@@ -1,0 +1,178 @@
+{
+  "ibge": "3518909",
+  "nome": "Guzolândia",
+  "uf": "SP",
+  "fonte": "Infosiga-SP — últimas 2 semanas completas disponíveis no extrato",
+  "periodo": "20 set 2026 – 26 set 2026",
+  "simulado": false,
+  "total": 0,
+  "porHora": [
+    3,
+    3,
+    2,
+    1,
+    2,
+    2,
+    2,
+    3,
+    3
+  ],
+  "porDia": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "variacaoSemanaPct": 0,
+  "pico": "06h",
+  "ranking": {
+    "tipo": "via",
+    "itens": [
+      {
+        "nome": "Sp 310",
+        "pct": 38
+      },
+      {
+        "nome": "Avenida Paschoal Guzo",
+        "pct": 17
+      },
+      {
+        "nome": "Policia Militar do Estado de Sao Paulo R August",
+        "pct": 8
+      },
+      {
+        "nome": "Rua Gregorio Jose do Prado",
+        "pct": 8
+      },
+      {
+        "nome": "Avenida João Tim",
+        "pct": 8
+      },
+      {
+        "nome": "Rua Ael Silveira Mendes",
+        "pct": 4
+      },
+      {
+        "nome": "Guzolandia",
+        "pct": 4
+      },
+      {
+        "nome": "Feliciano Salles da Cunha",
+        "pct": 4
+      },
+      {
+        "nome": "Avenida Paschoal Guzzo",
+        "pct": 4
+      },
+      {
+        "nome": "Rua Jose Candido de Moraes",
+        "pct": 4
+      }
+    ]
+  },
+  "pontos": [
+    {
+      "lat": -20.644,
+      "lon": -50.658,
+      "n": 1
+    },
+    {
+      "lat": -20.638,
+      "lon": -50.676,
+      "n": 1
+    },
+    {
+      "lat": -20.651,
+      "lon": -50.664,
+      "n": 1
+    },
+    {
+      "lat": -20.622,
+      "lon": -50.759,
+      "n": 1
+    },
+    {
+      "lat": -20.642,
+      "lon": -50.654,
+      "n": 1
+    },
+    {
+      "lat": -20.622,
+      "lon": -50.758,
+      "n": 1
+    },
+    {
+      "lat": -20.644,
+      "lon": -50.645,
+      "n": 1
+    },
+    {
+      "lat": -20.629,
+      "lon": -50.726,
+      "n": 1
+    },
+    {
+      "lat": -20.641,
+      "lon": -50.662,
+      "n": 1
+    },
+    {
+      "lat": -20.654,
+      "lon": -50.663,
+      "n": 1
+    },
+    {
+      "lat": -20.647,
+      "lon": -50.666,
+      "n": 3
+    },
+    {
+      "lat": -20.645,
+      "lon": -50.652,
+      "n": 1
+    },
+    {
+      "lat": -20.649,
+      "lon": -50.662,
+      "n": 1
+    },
+    {
+      "lat": -20.653,
+      "lon": -50.663,
+      "n": 1
+    },
+    {
+      "lat": -20.648,
+      "lon": -50.626,
+      "n": 1
+    },
+    {
+      "lat": -20.641,
+      "lon": -50.66,
+      "n": 1
+    },
+    {
+      "lat": -20.647,
+      "lon": -50.661,
+      "n": 2
+    },
+    {
+      "lat": -20.631,
+      "lon": -50.714,
+      "n": 1
+    },
+    {
+      "lat": -20.637,
+      "lon": -50.684,
+      "n": 1
+    },
+    {
+      "lat": -20.642,
+      "lon": -50.661,
+      "n": 1
+    }
+  ]
+}

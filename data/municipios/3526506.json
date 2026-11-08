@@ -1,0 +1,228 @@
+{
+  "ibge": "3526506",
+  "nome": "Lavínia",
+  "uf": "SP",
+  "fonte": "Infosiga-SP — últimas 2 semanas completas disponíveis no extrato",
+  "periodo": "20 set 2026 – 26 set 2026",
+  "simulado": false,
+  "total": 0,
+  "porHora": [
+    7,
+    5,
+    0,
+    6,
+    2,
+    8,
+    12,
+    5,
+    4
+  ],
+  "porDia": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "variacaoSemanaPct": 0,
+  "pico": "18h",
+  "ranking": {
+    "tipo": "via",
+    "itens": [
+      {
+        "nome": "Sp 300",
+        "pct": 23
+      },
+      {
+        "nome": "Rua José Gregório Souza",
+        "pct": 12
+      },
+      {
+        "nome": "Avenida Perobal",
+        "pct": 12
+      },
+      {
+        "nome": "Avenida Lavinia",
+        "pct": 6
+      },
+      {
+        "nome": "Delegacia de Polícia de Lavínia R Profa Maria",
+        "pct": 4
+      },
+      {
+        "nome": "Rua Professora Maria de Faria Gonfiantini",
+        "pct": 4
+      },
+      {
+        "nome": "Estrada Vicinal Lavínia-mirandópolis",
+        "pct": 2
+      },
+      {
+        "nome": "Avenida Sukeyoshi Kajiwara",
+        "pct": 2
+      },
+      {
+        "nome": "\"penitenciária I \"\"vereador Frederico Geometti\"\" de L\"",
+        "pct": 2
+      },
+      {
+        "nome": "3º Pelotão da 3ª Companhia do 28º Bpm/i Av Pero",
+        "pct": 2
+      }
+    ]
+  },
+  "pontos": [
+    {
+      "lat": -21.164,
+      "lon": -51.049,
+      "n": 8
+    },
+    {
+      "lat": -21.128,
+      "lon": -50.997,
+      "n": 1
+    },
+    {
+      "lat": -21.123,
+      "lon": -51.005,
+      "n": 5
+    },
+    {
+      "lat": -21.167,
+      "lon": -51.04,
+      "n": 2
+    },
+    {
+      "lat": -21.109,
+      "lon": -51.028,
+      "n": 1
+    },
+    {
+      "lat": -21.153,
+      "lon": -50.957,
+      "n": 2
+    },
+    {
+      "lat": -21.136,
+      "lon": -50.984,
+      "n": 1
+    },
+    {
+      "lat": -21.166,
+      "lon": -51.041,
+      "n": 2
+    },
+    {
+      "lat": -21.169,
+      "lon": -51.042,
+      "n": 4
+    },
+    {
+      "lat": -21.114,
+      "lon": -51.019,
+      "n": 1
+    },
+    {
+      "lat": -21.142,
+      "lon": -50.974,
+      "n": 1
+    },
+    {
+      "lat": -21.158,
+      "lon": -51.039,
+      "n": 1
+    },
+    {
+      "lat": -21.182,
+      "lon": -50.964,
+      "n": 1
+    },
+    {
+      "lat": -21.196,
+      "lon": -51.06,
+      "n": 1
+    },
+    {
+      "lat": -21.166,
+      "lon": -51.042,
+      "n": 1
+    },
+    {
+      "lat": -21.162,
+      "lon": -51.051,
+      "n": 1
+    },
+    {
+      "lat": -21.161,
+      "lon": -51.045,
+      "n": 2
+    },
+    {
+      "lat": -21.109,
+      "lon": -51.027,
+      "n": 1
+    },
+    {
+      "lat": -21.166,
+      "lon": -51.047,
+      "n": 1
+    },
+    {
+      "lat": -21.168,
+      "lon": -51.041,
+      "n": 1
+    },
+    {
+      "lat": -21.131,
+      "lon": -50.994,
+      "n": 1
+    },
+    {
+      "lat": -21.172,
+      "lon": -51.041,
+      "n": 1
+    },
+    {
+      "lat": -21.141,
+      "lon": -50.977,
+      "n": 1
+    },
+    {
+      "lat": -21.164,
+      "lon": -51.048,
+      "n": 1
+    },
+    {
+      "lat": -21.142,
+      "lon": -51.022,
+      "n": 1
+    },
+    {
+      "lat": -21.171,
+      "lon": -51.04,
+      "n": 1
+    },
+    {
+      "lat": -21.166,
+      "lon": -51.04,
+      "n": 2
+    },
+    {
+      "lat": -21.164,
+      "lon": -51.037,
+      "n": 1
+    },
+    {
+      "lat": -21.168,
+      "lon": -51.039,
+      "n": 1
+    },
+    {
+      "lat": -21.164,
+      "lon": -51.046,
+      "n": 1
+    }
+  ]
+}

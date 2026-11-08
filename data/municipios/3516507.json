@@ -1,0 +1,143 @@
+{
+  "ibge": "3516507",
+  "nome": "Gabriel Monteiro",
+  "uf": "SP",
+  "fonte": "Infosiga-SP — últimas 2 semanas completas disponíveis no extrato",
+  "periodo": "20 set 2026 – 26 set 2026",
+  "simulado": false,
+  "total": 0,
+  "porHora": [
+    1,
+    1,
+    3,
+    3,
+    3,
+    2,
+    3,
+    1,
+    5
+  ],
+  "porDia": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "variacaoSemanaPct": 0,
+  "pico": "22h",
+  "ranking": {
+    "tipo": "via",
+    "itens": [
+      {
+        "nome": "Policia Militar do Estado de São Paulo Av Padre",
+        "pct": 16
+      },
+      {
+        "nome": "Rua dos Imigrantes",
+        "pct": 16
+      },
+      {
+        "nome": "Avenida José Lopes Péres",
+        "pct": 8
+      },
+      {
+        "nome": "Rua Lavradores",
+        "pct": 8
+      },
+      {
+        "nome": "Rua José Bonifácio",
+        "pct": 4
+      },
+      {
+        "nome": "Rua Guaicurus",
+        "pct": 4
+      },
+      {
+        "nome": "Caetano Marchi",
+        "pct": 4
+      },
+      {
+        "nome": "Sp 461",
+        "pct": 4
+      },
+      {
+        "nome": "Praça Sao Pedro",
+        "pct": 4
+      },
+      {
+        "nome": "Avenida Vereador Antenor dos Santos",
+        "pct": 4
+      }
+    ]
+  },
+  "pontos": [
+    {
+      "lat": -21.529,
+      "lon": -50.556,
+      "n": 7
+    },
+    {
+      "lat": -21.531,
+      "lon": -50.559,
+      "n": 1
+    },
+    {
+      "lat": -21.531,
+      "lon": -50.554,
+      "n": 2
+    },
+    {
+      "lat": -21.526,
+      "lon": -50.552,
+      "n": 3
+    },
+    {
+      "lat": -21.531,
+      "lon": -50.558,
+      "n": 1
+    },
+    {
+      "lat": -21.532,
+      "lon": -50.552,
+      "n": 1
+    },
+    {
+      "lat": -21.528,
+      "lon": -50.555,
+      "n": 1
+    },
+    {
+      "lat": -21.529,
+      "lon": -50.552,
+      "n": 1
+    },
+    {
+      "lat": -21.528,
+      "lon": -50.554,
+      "n": 3
+    },
+    {
+      "lat": -21.533,
+      "lon": -50.554,
+      "n": 1
+    },
+    {
+      "lat": -21.483,
+      "lon": -50.529,
+      "n": 1
+    },
+    {
+      "lat": -21.532,
+      "lon": -50.559,
+      "n": 1
+    },
+    {
+      "lat": -21.529,
+      "lon": -50.555,
+      "n": 1
+    }
+  ]
+}

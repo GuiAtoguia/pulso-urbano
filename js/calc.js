@@ -1,6 +1,10 @@
 // Funções puras de cálculo para os widgets da Grade de observação.
 // Sem DOM, sem fetch — fáceis de testar isoladamente (ver js/calc.test.js).
 
+// 9 faixas de 2h, de 06h a 24h — mesma convenção usada em scripts/gerar-dados.js
+// (madrugada, 00h-06h, fica fora). Fonte única pros rótulos do widget e do script.
+export const FAIXAS_HORARIAS = ['06h', '08h', '10h', '12h', '14h', '16h', '18h', '20h', '22h'];
+
 export function scaleHeat(valor, max) {
   if (!Number.isFinite(valor) || !Number.isFinite(max) || max <= 0) return 0;
   const pct = (valor / max) * 100;

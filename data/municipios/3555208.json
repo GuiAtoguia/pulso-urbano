@@ -1,0 +1,148 @@
+{
+  "ibge": "3555208",
+  "nome": "Turiúba",
+  "uf": "SP",
+  "fonte": "Infosiga-SP — últimas 2 semanas completas disponíveis no extrato",
+  "periodo": "20 set 2026 – 26 set 2026",
+  "simulado": false,
+  "total": 0,
+  "porHora": [
+    1,
+    5,
+    0,
+    1,
+    2,
+    3,
+    5,
+    3,
+    3
+  ],
+  "porDia": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "variacaoSemanaPct": 0,
+  "pico": "08h",
+  "ranking": {
+    "tipo": "via",
+    "itens": [
+      {
+        "nome": "Sp 461",
+        "pct": 24
+      },
+      {
+        "nome": "Rua Capitão Vicente Gonçalves",
+        "pct": 24
+      },
+      {
+        "nome": "Rua José Cardoso",
+        "pct": 16
+      },
+      {
+        "nome": "Rua João Batista Passos",
+        "pct": 8
+      },
+      {
+        "nome": "Rua Jose Caro",
+        "pct": 8
+      },
+      {
+        "nome": "Estrada Vicinal Clóvis Oger",
+        "pct": 4
+      },
+      {
+        "nome": "Rua Joaquim Silva Neves",
+        "pct": 4
+      },
+      {
+        "nome": "Alcides Domino",
+        "pct": 4
+      },
+      {
+        "nome": "Rua Joao Doimo",
+        "pct": 4
+      },
+      {
+        "nome": "Rua Tarlei R Vilela",
+        "pct": 4
+      }
+    ]
+  },
+  "pontos": [
+    {
+      "lat": -20.946,
+      "lon": -50.107,
+      "n": 2
+    },
+    {
+      "lat": -20.943,
+      "lon": -50.137,
+      "n": 1
+    },
+    {
+      "lat": -20.953,
+      "lon": -50.111,
+      "n": 3
+    },
+    {
+      "lat": -20.951,
+      "lon": -50.104,
+      "n": 5
+    },
+    {
+      "lat": -20.951,
+      "lon": -50.109,
+      "n": 1
+    },
+    {
+      "lat": -21.256,
+      "lon": -50.42,
+      "n": 1
+    },
+    {
+      "lat": -20.951,
+      "lon": -50.108,
+      "n": 2
+    },
+    {
+      "lat": -20.939,
+      "lon": -50.135,
+      "n": 1
+    },
+    {
+      "lat": -20.948,
+      "lon": -50.107,
+      "n": 1
+    },
+    {
+      "lat": -20.947,
+      "lon": -50.112,
+      "n": 2
+    },
+    {
+      "lat": -20.987,
+      "lon": -50.157,
+      "n": 1
+    },
+    {
+      "lat": -20.932,
+      "lon": -50.131,
+      "n": 1
+    },
+    {
+      "lat": -20.948,
+      "lon": -50.108,
+      "n": 1
+    },
+    {
+      "lat": -20.972,
+      "lon": -50.151,
+      "n": 1
+    }
+  ]
+}

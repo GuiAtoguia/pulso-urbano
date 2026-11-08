@@ -1,0 +1,193 @@
+{
+  "ibge": "3523008",
+  "nome": "Itapura",
+  "uf": "SP",
+  "fonte": "Infosiga-SP — últimas 2 semanas completas disponíveis no extrato",
+  "periodo": "20 set 2026 – 26 set 2026",
+  "simulado": false,
+  "total": 0,
+  "porHora": [
+    3,
+    3,
+    0,
+    2,
+    1,
+    6,
+    8,
+    2,
+    5
+  ],
+  "porDia": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "variacaoSemanaPct": 0,
+  "pico": "18h",
+  "ranking": {
+    "tipo": "via",
+    "itens": [
+      {
+        "nome": "Sp 595",
+        "pct": 34
+      },
+      {
+        "nome": "Rua Jose Bonifacio",
+        "pct": 13
+      },
+      {
+        "nome": "Rua Sete de Setembro",
+        "pct": 6
+      },
+      {
+        "nome": "Sp 15390000 Brasil",
+        "pct": 6
+      },
+      {
+        "nome": "Avenida Marechal Artur Costa e Silva",
+        "pct": 6
+      },
+      {
+        "nome": "Rua Getulio Vargas",
+        "pct": 6
+      },
+      {
+        "nome": "Avenida Princesa Isabel",
+        "pct": 3
+      },
+      {
+        "nome": "Estrada Vicinal Geremias Lunardelli",
+        "pct": 3
+      },
+      {
+        "nome": "Vicinal Francisco de Godoy Moreira",
+        "pct": 3
+      },
+      {
+        "nome": "Rua Santos Dumont",
+        "pct": 3
+      }
+    ]
+  },
+  "pontos": [
+    {
+      "lat": -20.638,
+      "lon": -51.513,
+      "n": 4
+    },
+    {
+      "lat": -20.645,
+      "lon": -51.507,
+      "n": 1
+    },
+    {
+      "lat": -20.642,
+      "lon": -51.506,
+      "n": 1
+    },
+    {
+      "lat": -20.648,
+      "lon": -51.501,
+      "n": 1
+    },
+    {
+      "lat": -20.648,
+      "lon": -51.502,
+      "n": 1
+    },
+    {
+      "lat": -20.649,
+      "lon": -51.445,
+      "n": 4
+    },
+    {
+      "lat": -20.663,
+      "lon": -51.446,
+      "n": 1
+    },
+    {
+      "lat": -20.556,
+      "lon": -51.4,
+      "n": 1
+    },
+    {
+      "lat": -20.65,
+      "lon": -51.445,
+      "n": 1
+    },
+    {
+      "lat": -20.647,
+      "lon": -51.504,
+      "n": 4
+    },
+    {
+      "lat": -20.628,
+      "lon": -51.437,
+      "n": 1
+    },
+    {
+      "lat": -20.643,
+      "lon": -51.506,
+      "n": 1
+    },
+    {
+      "lat": -20.649,
+      "lon": -51.436,
+      "n": 1
+    },
+    {
+      "lat": -20.648,
+      "lon": -51.445,
+      "n": 1
+    },
+    {
+      "lat": -20.882,
+      "lon": -51.376,
+      "n": 1
+    },
+    {
+      "lat": -20.645,
+      "lon": -51.511,
+      "n": 1
+    },
+    {
+      "lat": -20.639,
+      "lon": -51.507,
+      "n": 1
+    },
+    {
+      "lat": -20.647,
+      "lon": -51.445,
+      "n": 1
+    },
+    {
+      "lat": -20.657,
+      "lon": -51.446,
+      "n": 1
+    },
+    {
+      "lat": -20.646,
+      "lon": -51.509,
+      "n": 1
+    },
+    {
+      "lat": -20.655,
+      "lon": -51.446,
+      "n": 1
+    },
+    {
+      "lat": -20.647,
+      "lon": -51.505,
+      "n": 1
+    },
+    {
+      "lat": -20.643,
+      "lon": -51.509,
+      "n": 1
+    }
+  ]
+}

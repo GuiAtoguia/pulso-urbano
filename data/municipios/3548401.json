@@ -1,0 +1,203 @@
+{
+  "ibge": "3548401",
+  "nome": "Santópolis do Aguapeí",
+  "uf": "SP",
+  "fonte": "Infosiga-SP — últimas 2 semanas completas disponíveis no extrato",
+  "periodo": "20 set 2026 – 26 set 2026",
+  "simulado": false,
+  "total": 2,
+  "porHora": [
+    7,
+    2,
+    3,
+    5,
+    5,
+    2,
+    6,
+    6,
+    2
+  ],
+  "porDia": [
+    1,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+  ],
+  "variacaoSemanaPct": null,
+  "pico": "06h",
+  "ranking": {
+    "tipo": "via",
+    "itens": [
+      {
+        "nome": "Sp 425",
+        "pct": 50
+      },
+      {
+        "nome": "Rua Clarinda Rosa Neto",
+        "pct": 10
+      },
+      {
+        "nome": "Rua Jose Pinheiro de Brito",
+        "pct": 10
+      },
+      {
+        "nome": "Policia Militat do Estado de São Paulo R Teolin",
+        "pct": 5
+      },
+      {
+        "nome": "Rua José Gracindo Alves",
+        "pct": 5
+      },
+      {
+        "nome": "Rua Fernando Siriani",
+        "pct": 2
+      },
+      {
+        "nome": "Rua Bahia",
+        "pct": 2
+      },
+      {
+        "nome": "Sp 1624",
+        "pct": 2
+      },
+      {
+        "nome": "Rua Orlando José Pereira",
+        "pct": 2
+      },
+      {
+        "nome": "Auto Posto Tome Santopolis do Aguapei State Of",
+        "pct": 2
+      }
+    ]
+  },
+  "pontos": [
+    {
+      "lat": -21.636,
+      "lon": -50.499,
+      "n": 1
+    },
+    {
+      "lat": -21.673,
+      "lon": -50.58,
+      "n": 1
+    },
+    {
+      "lat": -21.635,
+      "lon": -50.504,
+      "n": 3
+    },
+    {
+      "lat": -21.627,
+      "lon": -50.487,
+      "n": 1
+    },
+    {
+      "lat": -21.637,
+      "lon": -50.503,
+      "n": 1
+    },
+    {
+      "lat": -21.637,
+      "lon": -50.502,
+      "n": 3
+    },
+    {
+      "lat": -21.655,
+      "lon": -50.534,
+      "n": 1
+    },
+    {
+      "lat": -21.638,
+      "lon": -50.502,
+      "n": 1
+    },
+    {
+      "lat": -21.64,
+      "lon": -50.497,
+      "n": 1
+    },
+    {
+      "lat": -21.619,
+      "lon": -50.482,
+      "n": 1
+    },
+    {
+      "lat": -21.643,
+      "lon": -50.499,
+      "n": 1
+    },
+    {
+      "lat": -21.642,
+      "lon": -50.501,
+      "n": 1
+    },
+    {
+      "lat": -21.641,
+      "lon": -50.498,
+      "n": 2
+    },
+    {
+      "lat": -21.621,
+      "lon": -50.483,
+      "n": 1
+    },
+    {
+      "lat": -21.646,
+      "lon": -50.509,
+      "n": 1
+    },
+    {
+      "lat": -21.639,
+      "lon": -50.496,
+      "n": 1
+    },
+    {
+      "lat": -21.645,
+      "lon": -50.507,
+      "n": 6
+    },
+    {
+      "lat": -21.652,
+      "lon": -50.525,
+      "n": 1
+    },
+    {
+      "lat": -21.634,
+      "lon": -50.493,
+      "n": 7
+    },
+    {
+      "lat": -21.636,
+      "lon": -50.504,
+      "n": 2
+    },
+    {
+      "lat": -21.645,
+      "lon": -50.508,
+      "n": 1
+    },
+    {
+      "lat": -21.561,
+      "lon": -50.127,
+      "n": 1
+    },
+    {
+      "lat": -21.636,
+      "lon": -50.501,
+      "n": 1
+    },
+    {
+      "lat": -21.634,
+      "lon": -50.5,
+      "n": 1
+    },
+    {
+      "lat": -20.723,
+      "lon": -49.024,
+      "n": 1
+    }
+  ]
+}

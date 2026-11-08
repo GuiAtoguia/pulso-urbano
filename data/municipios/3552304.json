@@ -1,0 +1,218 @@
+{
+  "ibge": "3552304",
+  "nome": "Sud Mennucci",
+  "uf": "SP",
+  "fonte": "Infosiga-SP — últimas 2 semanas completas disponíveis no extrato",
+  "periodo": "20 set 2026 – 26 set 2026",
+  "simulado": false,
+  "total": 0,
+  "porHora": [
+    3,
+    1,
+    5,
+    2,
+    2,
+    6,
+    7,
+    5,
+    3
+  ],
+  "porDia": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "variacaoSemanaPct": 0,
+  "pico": "18h",
+  "ranking": {
+    "tipo": "via",
+    "itens": [
+      {
+        "nome": "Sp 310",
+        "pct": 26
+      },
+      {
+        "nome": "Rua Augusto Jose de Souza",
+        "pct": 10
+      },
+      {
+        "nome": "Rua Claudio Luis de Castilho",
+        "pct": 10
+      },
+      {
+        "nome": "Rua José Alves de Ataíde",
+        "pct": 8
+      },
+      {
+        "nome": "Rua Um",
+        "pct": 8
+      },
+      {
+        "nome": "Feliciano Salles da Cunha",
+        "pct": 5
+      },
+      {
+        "nome": "Rua José Benigo Gomes",
+        "pct": 3
+      },
+      {
+        "nome": "Avenida Pioneiros X R Carlos Alegre Ferreira",
+        "pct": 3
+      },
+      {
+        "nome": "Estrada Vicinal Carlos Alegre Ferreira",
+        "pct": 3
+      },
+      {
+        "nome": "Restaurante Rancho Tia Maria Feliciano Sall",
+        "pct": 3
+      }
+    ]
+  },
+  "pontos": [
+    {
+      "lat": -20.69,
+      "lon": -50.925,
+      "n": 4
+    },
+    {
+      "lat": -20.687,
+      "lon": -50.929,
+      "n": 1
+    },
+    {
+      "lat": -20.687,
+      "lon": -50.932,
+      "n": 4
+    },
+    {
+      "lat": -20.62,
+      "lon": -50.9,
+      "n": 2
+    },
+    {
+      "lat": -20.688,
+      "lon": -50.931,
+      "n": 1
+    },
+    {
+      "lat": -20.688,
+      "lon": -50.924,
+      "n": 1
+    },
+    {
+      "lat": -20.621,
+      "lon": -50.904,
+      "n": 1
+    },
+    {
+      "lat": -20.621,
+      "lon": -50.907,
+      "n": 1
+    },
+    {
+      "lat": -20.62,
+      "lon": -50.767,
+      "n": 1
+    },
+    {
+      "lat": -20.611,
+      "lon": -50.843,
+      "n": 1
+    },
+    {
+      "lat": -20.686,
+      "lon": -50.92,
+      "n": 1
+    },
+    {
+      "lat": -20.692,
+      "lon": -50.925,
+      "n": 2
+    },
+    {
+      "lat": -20.616,
+      "lon": -50.792,
+      "n": 1
+    },
+    {
+      "lat": -20.689,
+      "lon": -50.918,
+      "n": 1
+    },
+    {
+      "lat": -20.618,
+      "lon": -50.984,
+      "n": 1
+    },
+    {
+      "lat": -20.687,
+      "lon": -50.925,
+      "n": 3
+    },
+    {
+      "lat": -20.69,
+      "lon": -50.926,
+      "n": 1
+    },
+    {
+      "lat": -20.693,
+      "lon": -50.93,
+      "n": 1
+    },
+    {
+      "lat": -20.62,
+      "lon": -50.929,
+      "n": 1
+    },
+    {
+      "lat": -20.694,
+      "lon": -50.923,
+      "n": 1
+    },
+    {
+      "lat": -20.617,
+      "lon": -50.88,
+      "n": 1
+    },
+    {
+      "lat": -20.61,
+      "lon": -50.81,
+      "n": 1
+    },
+    {
+      "lat": -20.621,
+      "lon": -50.902,
+      "n": 1
+    },
+    {
+      "lat": -20.686,
+      "lon": -50.923,
+      "n": 1
+    },
+    {
+      "lat": -20.669,
+      "lon": -50.924,
+      "n": 1
+    },
+    {
+      "lat": -20.694,
+      "lon": -50.925,
+      "n": 1
+    },
+    {
+      "lat": -20.691,
+      "lon": -50.925,
+      "n": 1
+    },
+    {
+      "lat": -20.618,
+      "lon": -50.968,
+      "n": 1
+    }
+  ]
+}

@@ -1,0 +1,228 @@
+{
+  "ibge": "3507704",
+  "nome": "Braúna",
+  "uf": "SP",
+  "fonte": "Infosiga-SP — últimas 2 semanas completas disponíveis no extrato",
+  "periodo": "20 set 2026 – 26 set 2026",
+  "simulado": false,
+  "total": 0,
+  "porHora": [
+    4,
+    1,
+    1,
+    3,
+    5,
+    7,
+    7,
+    4,
+    5
+  ],
+  "porDia": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "variacaoSemanaPct": 0,
+  "pico": "16h",
+  "ranking": {
+    "tipo": "via",
+    "itens": [
+      {
+        "nome": "Sp 425",
+        "pct": 40
+      },
+      {
+        "nome": "Rua Francisco José Trindade",
+        "pct": 9
+      },
+      {
+        "nome": "Avenida Barão do Rio Branco",
+        "pct": 4
+      },
+      {
+        "nome": "Polícia Militar do Estado de São Paulo R Luís R",
+        "pct": 4
+      },
+      {
+        "nome": "Rua Luís Ramos da Silva",
+        "pct": 4
+      },
+      {
+        "nome": "Rua Enedir Sampaio",
+        "pct": 4
+      },
+      {
+        "nome": "Rua Floriano Peixoto",
+        "pct": 2
+      },
+      {
+        "nome": "Vicinal Pedro de Rossi Km",
+        "pct": 2
+      },
+      {
+        "nome": "Sitio Guaporanga Assis Chateaubriand Braun",
+        "pct": 2
+      },
+      {
+        "nome": "Orlando Zancaner",
+        "pct": 2
+      }
+    ]
+  },
+  "pontos": [
+    {
+      "lat": -21.5,
+      "lon": -50.317,
+      "n": 2
+    },
+    {
+      "lat": -21.524,
+      "lon": -50.312,
+      "n": 3
+    },
+    {
+      "lat": -21.544,
+      "lon": -50.331,
+      "n": 4
+    },
+    {
+      "lat": -21.501,
+      "lon": -50.317,
+      "n": 1
+    },
+    {
+      "lat": -21.501,
+      "lon": -50.313,
+      "n": 5
+    },
+    {
+      "lat": -21.503,
+      "lon": -50.317,
+      "n": 1
+    },
+    {
+      "lat": -21.519,
+      "lon": -50.3,
+      "n": 1
+    },
+    {
+      "lat": -21.5,
+      "lon": -50.319,
+      "n": 3
+    },
+    {
+      "lat": -21.56,
+      "lon": -50.383,
+      "n": 1
+    },
+    {
+      "lat": -21.485,
+      "lon": -50.213,
+      "n": 1
+    },
+    {
+      "lat": -21.505,
+      "lon": -50.32,
+      "n": 1
+    },
+    {
+      "lat": -21.557,
+      "lon": -50.344,
+      "n": 1
+    },
+    {
+      "lat": -21.507,
+      "lon": -50.271,
+      "n": 1
+    },
+    {
+      "lat": -21.499,
+      "lon": -50.317,
+      "n": 2
+    },
+    {
+      "lat": -21.563,
+      "lon": -50.391,
+      "n": 1
+    },
+    {
+      "lat": -21.505,
+      "lon": -50.322,
+      "n": 1
+    },
+    {
+      "lat": -21.502,
+      "lon": -50.314,
+      "n": 1
+    },
+    {
+      "lat": -21.507,
+      "lon": -50.272,
+      "n": 1
+    },
+    {
+      "lat": -21.502,
+      "lon": -50.318,
+      "n": 1
+    },
+    {
+      "lat": -21.455,
+      "lon": -50.166,
+      "n": 1
+    },
+    {
+      "lat": -21.504,
+      "lon": -50.32,
+      "n": 1
+    },
+    {
+      "lat": -21.499,
+      "lon": -50.316,
+      "n": 1
+    },
+    {
+      "lat": -21.533,
+      "lon": -50.322,
+      "n": 1
+    },
+    {
+      "lat": -21.346,
+      "lon": -50.052,
+      "n": 1
+    },
+    {
+      "lat": -21.582,
+      "lon": -50.453,
+      "n": 1
+    },
+    {
+      "lat": -21.503,
+      "lon": -50.323,
+      "n": 1
+    },
+    {
+      "lat": -21.494,
+      "lon": -50.312,
+      "n": 1
+    },
+    {
+      "lat": -21.516,
+      "lon": -50.294,
+      "n": 1
+    },
+    {
+      "lat": -21.438,
+      "lon": -50.142,
+      "n": 1
+    },
+    {
+      "lat": -21.482,
+      "lon": -50.315,
+      "n": 1
+    }
+  ]
+}

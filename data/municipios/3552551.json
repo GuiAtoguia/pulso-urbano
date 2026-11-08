@@ -1,0 +1,178 @@
+{
+  "ibge": "3552551",
+  "nome": "Suzanápolis",
+  "uf": "SP",
+  "fonte": "Infosiga-SP — últimas 2 semanas completas disponíveis no extrato",
+  "periodo": "20 set 2026 – 26 set 2026",
+  "simulado": false,
+  "total": 0,
+  "porHora": [
+    2,
+    3,
+    2,
+    2,
+    4,
+    8,
+    8,
+    0,
+    6
+  ],
+  "porDia": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "variacaoSemanaPct": 0,
+  "pico": "16h",
+  "ranking": {
+    "tipo": "via",
+    "itens": [
+      {
+        "nome": "Travessa Um",
+        "pct": 18
+      },
+      {
+        "nome": "Rua São João",
+        "pct": 11
+      },
+      {
+        "nome": "Polícia Militar do Estado de São Paulo R Vinte",
+        "pct": 8
+      },
+      {
+        "nome": "Rua Vinte e Um de Abril",
+        "pct": 8
+      },
+      {
+        "nome": "Rua Duque de Caxias",
+        "pct": 8
+      },
+      {
+        "nome": "Rua Sete de Setembro",
+        "pct": 5
+      },
+      {
+        "nome": "Sp 595",
+        "pct": 3
+      },
+      {
+        "nome": "Rua João Rosa de Souza",
+        "pct": 3
+      },
+      {
+        "nome": "Assentamento Uniao da Vitoria",
+        "pct": 3
+      },
+      {
+        "nome": "Rua Antônio Jesus Pastoreli",
+        "pct": 3
+      }
+    ]
+  },
+  "pontos": [
+    {
+      "lat": -20.499,
+      "lon": -51.022,
+      "n": 4
+    },
+    {
+      "lat": -20.408,
+      "lon": -51.107,
+      "n": 1
+    },
+    {
+      "lat": -20.5,
+      "lon": -51.022,
+      "n": 1
+    },
+    {
+      "lat": -20.498,
+      "lon": -51.028,
+      "n": 5
+    },
+    {
+      "lat": -20.5,
+      "lon": -51.025,
+      "n": 1
+    },
+    {
+      "lat": -20.502,
+      "lon": -51.029,
+      "n": 1
+    },
+    {
+      "lat": -20.499,
+      "lon": -51.026,
+      "n": 1
+    },
+    {
+      "lat": -20.503,
+      "lon": -51.022,
+      "n": 1
+    },
+    {
+      "lat": -20.498,
+      "lon": -51.026,
+      "n": 2
+    },
+    {
+      "lat": -20.501,
+      "lon": -51.029,
+      "n": 3
+    },
+    {
+      "lat": -20.501,
+      "lon": -51.026,
+      "n": 5
+    },
+    {
+      "lat": -20.5,
+      "lon": -51.03,
+      "n": 1
+    },
+    {
+      "lat": -20.502,
+      "lon": -51.025,
+      "n": 1
+    },
+    {
+      "lat": -20.617,
+      "lon": -51.003,
+      "n": 1
+    },
+    {
+      "lat": -20.499,
+      "lon": -51.027,
+      "n": 1
+    },
+    {
+      "lat": -20.499,
+      "lon": -51.029,
+      "n": 2
+    },
+    {
+      "lat": -20.458,
+      "lon": -51.063,
+      "n": 1
+    },
+    {
+      "lat": -20.431,
+      "lon": -51.339,
+      "n": 1
+    },
+    {
+      "lat": -20.501,
+      "lon": -51.025,
+      "n": 1
+    },
+    {
+      "lat": -20.498,
+      "lon": -51.031,
+      "n": 1
+    }
+  ]
+}

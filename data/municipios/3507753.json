@@ -1,0 +1,144 @@
+{
+  "ibge": "3507753",
+  "nome": "Brejo Alegre",
+  "uf": "SP",
+  "fonte": "Infosiga-SP — últimas 2 semanas completas disponíveis no extrato",
+  "periodo": "20 set 2026 – 26 set 2026",
+  "simulado": false,
+  "total": 0,
+  "porHora": [
+    1,
+    1,
+    4,
+    1,
+    1,
+    1,
+    7,
+    1,
+    0
+  ],
+  "porDia": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "variacaoSemanaPct": 0,
+  "pico": "18h",
+  "ranking": {
+    "tipo": "via",
+    "itens": [
+      {
+        "nome": "Sp 461",
+        "pct": 39
+      },
+      {
+        "nome": "Rua Coroados",
+        "pct": 17
+      },
+      {
+        "nome": "Polícia Militar do Estado de São Paulo Avenida P",
+        "pct": 11
+      },
+      {
+        "nome": "Vicinal Massahau Sakai (brejo Alegre)",
+        "pct": 6
+      },
+      {
+        "nome": "Rua das Palmeiras",
+        "pct": 6
+      },
+      {
+        "nome": "Deputado Rolemberg",
+        "pct": 6
+      },
+      {
+        "nome": "Rua Oito de Julho",
+        "pct": 6
+      },
+      {
+        "nome": "Gabriel Melhado",
+        "pct": 6
+      },
+      {
+        "nome": "Vicinal Massaharu Sakai",
+        "pct": 6
+      }
+    ]
+  },
+  "pontos": [
+    {
+      "lat": -21.155,
+      "lon": -50.221,
+      "n": 1
+    },
+    {
+      "lat": -21.141,
+      "lon": -50.213,
+      "n": 1
+    },
+    {
+      "lat": -21.166,
+      "lon": -50.184,
+      "n": 1
+    },
+    {
+      "lat": -21.14,
+      "lon": -50.213,
+      "n": 1
+    },
+    {
+      "lat": -21.167,
+      "lon": -50.181,
+      "n": 2
+    },
+    {
+      "lat": -21.137,
+      "lon": -50.213,
+      "n": 2
+    },
+    {
+      "lat": -21.168,
+      "lon": -50.181,
+      "n": 1
+    },
+    {
+      "lat": -21.166,
+      "lon": -50.188,
+      "n": 1
+    },
+    {
+      "lat": -21.158,
+      "lon": -50.226,
+      "n": 1
+    },
+    {
+      "lat": -21.239,
+      "lon": -50.316,
+      "n": 1
+    },
+    {
+      "lat": -21.392,
+      "lon": -50.474,
+      "n": 1
+    },
+    {
+      "lat": -21.168,
+      "lon": -50.18,
+      "n": 1
+    },
+    {
+      "lat": -21.165,
+      "lon": -50.184,
+      "n": 1
+    },
+    {
+      "lat": -21.136,
+      "lon": -50.213,
+      "n": 1
+    }
+  ]
+}

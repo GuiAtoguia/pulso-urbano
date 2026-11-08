@@ -1,9 +1,303 @@
 [
   {
+    "ibge": "3501103",
+    "nome": "Alto Alegre",
+    "uf": "SP",
+    "lat": -21.5820592,
+    "lon": -50.1661976
+  },
+  {
+    "ibge": "3502101",
+    "nome": "Andradina",
+    "uf": "SP",
+    "lat": -20.896505,
+    "lon": -51.3742765
+  },
+  {
     "ibge": "3502804",
     "nome": "Araçatuba",
     "uf": "SP",
-    "lat": -21.2076,
-    "lon": -50.4401
+    "lat": -21.207992,
+    "lon": -50.4390225
+  },
+  {
+    "ibge": "3504206",
+    "nome": "Auriflama",
+    "uf": "SP",
+    "lat": -20.6840418,
+    "lon": -50.5554616
+  },
+  {
+    "ibge": "3504404",
+    "nome": "Avanhandava",
+    "uf": "SP",
+    "lat": -21.4603331,
+    "lon": -49.9465156
+  },
+  {
+    "ibge": "3505104",
+    "nome": "Barbosa",
+    "uf": "SP",
+    "lat": -21.267767,
+    "lon": -49.950265
+  },
+  {
+    "ibge": "3506201",
+    "nome": "Bento de Abreu",
+    "uf": "SP",
+    "lat": -21.2715723,
+    "lon": -50.8117225
+  },
+  {
+    "ibge": "3506409",
+    "nome": "Bilac",
+    "uf": "SP",
+    "lat": -21.403962,
+    "lon": -50.47464
+  },
+  {
+    "ibge": "3506508",
+    "nome": "Birigui",
+    "uf": "SP",
+    "lat": -21.2908491,
+    "lon": -50.34144
+  },
+  {
+    "ibge": "3507704",
+    "nome": "Braúna",
+    "uf": "SP",
+    "lat": -21.5015319,
+    "lon": -50.3175246
+  },
+  {
+    "ibge": "3507753",
+    "nome": "Brejo Alegre",
+    "uf": "SP",
+    "lat": -21.1671191,
+    "lon": -50.1850393
+  },
+  {
+    "ibge": "3508108",
+    "nome": "Buritama",
+    "uf": "SP",
+    "lat": -21.0664017,
+    "lon": -50.1448077
+  },
+  {
+    "ibge": "3511003",
+    "nome": "Castilho",
+    "uf": "SP",
+    "lat": -20.8702177,
+    "lon": -51.4906331
+  },
+  {
+    "ibge": "3511904",
+    "nome": "Clementina",
+    "uf": "SP",
+    "lat": -21.5594631,
+    "lon": -50.448624
+  },
+  {
+    "ibge": "3512506",
+    "nome": "Coroados",
+    "uf": "SP",
+    "lat": -21.3554634,
+    "lon": -50.2853589
+  },
+  {
+    "ibge": "3516507",
+    "nome": "Gabriel Monteiro",
+    "uf": "SP",
+    "lat": -21.5299436,
+    "lon": -50.5533059
+  },
+  {
+    "ibge": "3516804",
+    "nome": "Gastão Vidigal",
+    "uf": "SP",
+    "lat": -20.7956829,
+    "lon": -50.1907615
+  },
+  {
+    "ibge": "3516903",
+    "nome": "General Salgado",
+    "uf": "SP",
+    "lat": -20.6488139,
+    "lon": -50.3608101
+  },
+  {
+    "ibge": "3517109",
+    "nome": "Glicério",
+    "uf": "SP",
+    "lat": -21.3814805,
+    "lon": -50.2100452
+  },
+  {
+    "ibge": "3517802",
+    "nome": "Guaraçaí",
+    "uf": "SP",
+    "lat": -21.0322387,
+    "lon": -51.2100464
+  },
+  {
+    "ibge": "3518206",
+    "nome": "Guararapes",
+    "uf": "SP",
+    "lat": -21.2542739,
+    "lon": -50.6440083
+  },
+  {
+    "ibge": "3518909",
+    "nome": "Guzolândia",
+    "uf": "SP",
+    "lat": -20.6491637,
+    "lon": -50.6622974
+  },
+  {
+    "ibge": "3520442",
+    "nome": "Ilha Solteira",
+    "uf": "SP",
+    "lat": -20.4281001,
+    "lon": -51.3410871
+  },
+  {
+    "ibge": "3523008",
+    "nome": "Itapura",
+    "uf": "SP",
+    "lat": -20.6435211,
+    "lon": -51.5084479
+  },
+  {
+    "ibge": "3526506",
+    "nome": "Lavínia",
+    "uf": "SP",
+    "lat": -21.1665477,
+    "lon": -51.0410539
+  },
+  {
+    "ibge": "3527256",
+    "nome": "Lourdes",
+    "uf": "SP",
+    "lat": -20.9672545,
+    "lon": -50.224966
+  },
+  {
+    "ibge": "3527702",
+    "nome": "Luiziânia",
+    "uf": "SP",
+    "lat": -21.6763356,
+    "lon": -50.3269863
+  },
+  {
+    "ibge": "3530102",
+    "nome": "Mirandópolis",
+    "uf": "SP",
+    "lat": -21.1328313,
+    "lon": -51.1029422
+  },
+  {
+    "ibge": "3532108",
+    "nome": "Murutinga do Sul",
+    "uf": "SP",
+    "lat": -20.9913722,
+    "lon": -51.2782237
+  },
+  {
+    "ibge": "3532868",
+    "nome": "Nova Castilho",
+    "uf": "SP",
+    "lat": -20.7638386,
+    "lon": -50.3427479
+  },
+  {
+    "ibge": "3533205",
+    "nome": "Nova Independência",
+    "uf": "SP",
+    "lat": -21.1066536,
+    "lon": -51.4910804
+  },
+  {
+    "ibge": "3533304",
+    "nome": "Nova Luzitânia",
+    "uf": "SP",
+    "lat": -20.8558333,
+    "lon": -50.2619444
+  },
+  {
+    "ibge": "3537305",
+    "nome": "Penápolis",
+    "uf": "SP",
+    "lat": -21.4192406,
+    "lon": -50.0765588
+  },
+  {
+    "ibge": "3537404",
+    "nome": "Pereira Barreto",
+    "uf": "SP",
+    "lat": -20.6378509,
+    "lon": -51.1052172
+  },
+  {
+    "ibge": "3537701",
+    "nome": "Piacatu",
+    "uf": "SP",
+    "lat": -21.5901744,
+    "lon": -50.5972241
+  },
+  {
+    "ibge": "3544400",
+    "nome": "Rubiácea",
+    "uf": "SP",
+    "lat": -21.2996334,
+    "lon": -50.7298698
+  },
+  {
+    "ibge": "3548054",
+    "nome": "Santo Antônio do Aracanguá",
+    "uf": "SP",
+    "lat": -20.9361894,
+    "lon": -50.4959965
+  },
+  {
+    "ibge": "3548401",
+    "nome": "Santópolis do Aguapeí",
+    "uf": "SP",
+    "lat": -21.6379556,
+    "lon": -50.5008527
+  },
+  {
+    "ibge": "3549250",
+    "nome": "São João de Iracema",
+    "uf": "SP",
+    "lat": -20.5134345,
+    "lon": -50.352595
+  },
+  {
+    "ibge": "3552304",
+    "nome": "Sud Mennucci",
+    "uf": "SP",
+    "lat": -20.6906175,
+    "lon": -50.9240834
+  },
+  {
+    "ibge": "3552551",
+    "nome": "Suzanápolis",
+    "uf": "SP",
+    "lat": -20.5011185,
+    "lon": -51.0246771
+  },
+  {
+    "ibge": "3555208",
+    "nome": "Turiúba",
+    "uf": "SP",
+    "lat": -20.9491284,
+    "lon": -50.1082011
+  },
+  {
+    "ibge": "3556305",
+    "nome": "Valparaíso",
+    "uf": "SP",
+    "lat": -21.2230369,
+    "lon": -50.8666375
   }
 ]

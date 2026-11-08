@@ -1,0 +1,178 @@
+{
+  "ibge": "3506201",
+  "nome": "Bento de Abreu",
+  "uf": "SP",
+  "fonte": "Infosiga-SP — últimas 2 semanas completas disponíveis no extrato",
+  "periodo": "20 set 2026 – 26 set 2026",
+  "simulado": false,
+  "total": 0,
+  "porHora": [
+    3,
+    0,
+    1,
+    2,
+    2,
+    2,
+    5,
+    2,
+    2
+  ],
+  "porDia": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "variacaoSemanaPct": 0,
+  "pico": "18h",
+  "ranking": {
+    "tipo": "via",
+    "itens": [
+      {
+        "nome": "Sp 300",
+        "pct": 52
+      },
+      {
+        "nome": "Rua Joao Belmiro de Brito",
+        "pct": 8
+      },
+      {
+        "nome": "Rua Hugo Scatena",
+        "pct": 8
+      },
+      {
+        "nome": "Marcilio Vioto",
+        "pct": 4
+      },
+      {
+        "nome": "Rua Doutor José Rosseto",
+        "pct": 4
+      },
+      {
+        "nome": "Rua São Paulo",
+        "pct": 4
+      },
+      {
+        "nome": "Spa 568/300",
+        "pct": 4
+      },
+      {
+        "nome": "Rua Vinte e Sete de Marco",
+        "pct": 4
+      },
+      {
+        "nome": "Rua Ernesto Scatena",
+        "pct": 4
+      },
+      {
+        "nome": "Estrada Municipal Vps-012",
+        "pct": 4
+      }
+    ]
+  },
+  "pontos": [
+    {
+      "lat": -21.208,
+      "lon": -50.75,
+      "n": 1
+    },
+    {
+      "lat": -21.269,
+      "lon": -50.812,
+      "n": 1
+    },
+    {
+      "lat": -21.207,
+      "lon": -50.76,
+      "n": 4
+    },
+    {
+      "lat": -21.205,
+      "lon": -50.789,
+      "n": 2
+    },
+    {
+      "lat": -21.211,
+      "lon": -50.729,
+      "n": 1
+    },
+    {
+      "lat": -21.204,
+      "lon": -50.808,
+      "n": 1
+    },
+    {
+      "lat": -21.271,
+      "lon": -50.815,
+      "n": 1
+    },
+    {
+      "lat": -21.272,
+      "lon": -50.809,
+      "n": 1
+    },
+    {
+      "lat": -21.205,
+      "lon": -50.778,
+      "n": 1
+    },
+    {
+      "lat": -21.268,
+      "lon": -50.814,
+      "n": 1
+    },
+    {
+      "lat": -21.257,
+      "lon": -50.806,
+      "n": 1
+    },
+    {
+      "lat": -21.252,
+      "lon": -50.804,
+      "n": 1
+    },
+    {
+      "lat": -21.231,
+      "lon": -50.862,
+      "n": 1
+    },
+    {
+      "lat": -21.275,
+      "lon": -50.812,
+      "n": 1
+    },
+    {
+      "lat": -21.207,
+      "lon": -50.756,
+      "n": 1
+    },
+    {
+      "lat": -21.207,
+      "lon": -50.754,
+      "n": 1
+    },
+    {
+      "lat": -21.205,
+      "lon": -50.809,
+      "n": 1
+    },
+    {
+      "lat": -21.273,
+      "lon": -50.808,
+      "n": 1
+    },
+    {
+      "lat": -21.272,
+      "lon": -50.814,
+      "n": 1
+    },
+    {
+      "lat": -21.208,
+      "lon": -50.751,
+      "n": 1
+    }
+  ]
+}

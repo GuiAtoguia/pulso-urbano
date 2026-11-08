@@ -1,0 +1,248 @@
+{
+  "ibge": "3517109",
+  "nome": "Glicério",
+  "uf": "SP",
+  "fonte": "Infosiga-SP — últimas 2 semanas completas disponíveis no extrato",
+  "periodo": "20 set 2026 – 26 set 2026",
+  "simulado": false,
+  "total": 0,
+  "porHora": [
+    2,
+    3,
+    2,
+    4,
+    5,
+    9,
+    10,
+    6,
+    2
+  ],
+  "porDia": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "variacaoSemanaPct": -100,
+  "pico": "18h",
+  "ranking": {
+    "tipo": "via",
+    "itens": [
+      {
+        "nome": "Sp 300",
+        "pct": 37
+      },
+      {
+        "nome": "Rua Prefeito Fuad Eid",
+        "pct": 8
+      },
+      {
+        "nome": "Rua Um",
+        "pct": 6
+      },
+      {
+        "nome": "Rua Abraão Issa",
+        "pct": 6
+      },
+      {
+        "nome": "Rua José de Castilho Sobrinho",
+        "pct": 4
+      },
+      {
+        "nome": "Polícia Militar do Estado de São Paulo R Pref",
+        "pct": 4
+      },
+      {
+        "nome": "Vicinal Francisco Barbosa de Carvalho",
+        "pct": 4
+      },
+      {
+        "nome": "Rua João Antônio de Castilho",
+        "pct": 4
+      },
+      {
+        "nome": "Rua José Marques da Silva",
+        "pct": 2
+      },
+      {
+        "nome": "Rua Francisco Sala Na Pedreira",
+        "pct": 2
+      }
+    ]
+  },
+  "pontos": [
+    {
+      "lat": -21.381,
+      "lon": -50.209,
+      "n": 4
+    },
+    {
+      "lat": -21.402,
+      "lon": -50.221,
+      "n": 1
+    },
+    {
+      "lat": -21.419,
+      "lon": -50.187,
+      "n": 2
+    },
+    {
+      "lat": -21.376,
+      "lon": -50.211,
+      "n": 1
+    },
+    {
+      "lat": -21.393,
+      "lon": -50.237,
+      "n": 1
+    },
+    {
+      "lat": -21.383,
+      "lon": -50.211,
+      "n": 2
+    },
+    {
+      "lat": -21.378,
+      "lon": -50.21,
+      "n": 1
+    },
+    {
+      "lat": -21.424,
+      "lon": -50.179,
+      "n": 1
+    },
+    {
+      "lat": -21.378,
+      "lon": -50.206,
+      "n": 1
+    },
+    {
+      "lat": -21.406,
+      "lon": -50.212,
+      "n": 2
+    },
+    {
+      "lat": -21.376,
+      "lon": -50.214,
+      "n": 1
+    },
+    {
+      "lat": -21.377,
+      "lon": -50.207,
+      "n": 1
+    },
+    {
+      "lat": -21.374,
+      "lon": -50.208,
+      "n": 2
+    },
+    {
+      "lat": -21.401,
+      "lon": -50.223,
+      "n": 1
+    },
+    {
+      "lat": -21.375,
+      "lon": -50.208,
+      "n": 3
+    },
+    {
+      "lat": -21.392,
+      "lon": -50.238,
+      "n": 1
+    },
+    {
+      "lat": -21.39,
+      "lon": -50.241,
+      "n": 1
+    },
+    {
+      "lat": -21.387,
+      "lon": -50.247,
+      "n": 1
+    },
+    {
+      "lat": -21.407,
+      "lon": -50.212,
+      "n": 1
+    },
+    {
+      "lat": -21.403,
+      "lon": -50.219,
+      "n": 2
+    },
+    {
+      "lat": -21.202,
+      "lon": -50.163,
+      "n": 1
+    },
+    {
+      "lat": -21.387,
+      "lon": -50.212,
+      "n": 2
+    },
+    {
+      "lat": -21.416,
+      "lon": -50.195,
+      "n": 1
+    },
+    {
+      "lat": -21.383,
+      "lon": -50.212,
+      "n": 1
+    },
+    {
+      "lat": -21.397,
+      "lon": -50.23,
+      "n": 2
+    },
+    {
+      "lat": -21.233,
+      "lon": -50.176,
+      "n": 1
+    },
+    {
+      "lat": -21.261,
+      "lon": -50.172,
+      "n": 1
+    },
+    {
+      "lat": -21.381,
+      "lon": -50.206,
+      "n": 1
+    },
+    {
+      "lat": -21.378,
+      "lon": -50.212,
+      "n": 1
+    },
+    {
+      "lat": -21.18,
+      "lon": -50.171,
+      "n": 1
+    },
+    {
+      "lat": -21.415,
+      "lon": -50.196,
+      "n": 2
+    },
+    {
+      "lat": -21.379,
+      "lon": -50.209,
+      "n": 1
+    },
+    {
+      "lat": -21.381,
+      "lon": -50.21,
+      "n": 1
+    },
+    {
+      "lat": -21.385,
+      "lon": -50.214,
+      "n": 1
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "ibge": "3532868",
+  "nome": "Nova Castilho",
+  "uf": "SP",
+  "fonte": "Infosiga-SP — últimas 2 semanas completas disponíveis no extrato",
+  "periodo": "20 set 2026 – 26 set 2026",
+  "simulado": false,
+  "total": 0,
+  "porHora": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    2,
+    2
+  ],
+  "porDia": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "variacaoSemanaPct": 0,
+  "pico": "18h",
+  "ranking": {
+    "tipo": "via",
+    "itens": [
+      {
+        "nome": "Rua São José",
+        "pct": 50
+      },
+      {
+        "nome": "Avenida Virgínia Campela da Silva",
+        "pct": 17
+      },
+      {
+        "nome": "Estrada de Terra Km 7",
+        "pct": 17
+      },
+      {
+        "nome": "Estrada Nova Palmira",
+        "pct": 17
+      }
+    ]
+  },
+  "pontos": [
+    {
+      "lat": -20.761,
+      "lon": -50.344,
+      "n": 5
+    },
+    {
+      "lat": -20.762,
+      "lon": -50.342,
+      "n": 1
+    }
+  ]
+}

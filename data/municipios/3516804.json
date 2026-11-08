@@ -1,0 +1,153 @@
+{
+  "ibge": "3516804",
+  "nome": "Gastão Vidigal",
+  "uf": "SP",
+  "fonte": "Infosiga-SP — últimas 2 semanas completas disponíveis no extrato",
+  "periodo": "20 set 2026 – 26 set 2026",
+  "simulado": false,
+  "total": 0,
+  "porHora": [
+    1,
+    2,
+    1,
+    3,
+    4,
+    2,
+    3,
+    1,
+    2
+  ],
+  "porDia": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "variacaoSemanaPct": 0,
+  "pico": "14h",
+  "ranking": {
+    "tipo": "via",
+    "itens": [
+      {
+        "nome": "Sp 473",
+        "pct": 38
+      },
+      {
+        "nome": "Rua José de Oliveira Marquês",
+        "pct": 10
+      },
+      {
+        "nome": "Rua Dom Pedro Ii",
+        "pct": 10
+      },
+      {
+        "nome": "Antonio Vilela",
+        "pct": 10
+      },
+      {
+        "nome": "Polícia Militar do Estado de São Paulo R Antôni",
+        "pct": 5
+      },
+      {
+        "nome": "Rua José R Silva",
+        "pct": 5
+      },
+      {
+        "nome": "Pelo Trevo da Antonio Vilela",
+        "pct": 5
+      },
+      {
+        "nome": "Vicinal",
+        "pct": 5
+      },
+      {
+        "nome": "Floriavante Belini",
+        "pct": 5
+      },
+      {
+        "nome": "Rua Antonio Pantaleao",
+        "pct": 5
+      }
+    ]
+  },
+  "pontos": [
+    {
+      "lat": -20.793,
+      "lon": -50.199,
+      "n": 1
+    },
+    {
+      "lat": -20.801,
+      "lon": -50.19,
+      "n": 4
+    },
+    {
+      "lat": -20.796,
+      "lon": -50.193,
+      "n": 1
+    },
+    {
+      "lat": -20.833,
+      "lon": -50.233,
+      "n": 1
+    },
+    {
+      "lat": -20.823,
+      "lon": -50.218,
+      "n": 1
+    },
+    {
+      "lat": -20.755,
+      "lon": -50.173,
+      "n": 1
+    },
+    {
+      "lat": -20.8,
+      "lon": -50.192,
+      "n": 1
+    },
+    {
+      "lat": -20.799,
+      "lon": -50.187,
+      "n": 1
+    },
+    {
+      "lat": -20.789,
+      "lon": -50.197,
+      "n": 3
+    },
+    {
+      "lat": -20.797,
+      "lon": -50.191,
+      "n": 1
+    },
+    {
+      "lat": -20.798,
+      "lon": -50.185,
+      "n": 1
+    },
+    {
+      "lat": -20.686,
+      "lon": -50.155,
+      "n": 2
+    },
+    {
+      "lat": -20.756,
+      "lon": -50.174,
+      "n": 1
+    },
+    {
+      "lat": -20.794,
+      "lon": -50.19,
+      "n": 1
+    },
+    {
+      "lat": -20.797,
+      "lon": -50.19,
+      "n": 1
+    }
+  ]
+}

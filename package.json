@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "gerar-simulado": "node scripts/gerar-simulado.js",
+    "gerar-dados": "node scripts/gerar-dados.js",
     "test": "vitest run"
   },
   "devDependencies": {

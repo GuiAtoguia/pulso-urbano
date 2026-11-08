@@ -1,0 +1,139 @@
+{
+  "ibge": "3527702",
+  "nome": "Luiziânia",
+  "uf": "SP",
+  "fonte": "Infosiga-SP — últimas 2 semanas completas disponíveis no extrato",
+  "periodo": "20 set 2026 – 26 set 2026",
+  "simulado": false,
+  "total": 0,
+  "porHora": [
+    3,
+    3,
+    0,
+    0,
+    1,
+    4,
+    2,
+    2,
+    3
+  ],
+  "porDia": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "variacaoSemanaPct": 0,
+  "pico": "16h",
+  "ranking": {
+    "tipo": "via",
+    "itens": [
+      {
+        "nome": "Sp 419",
+        "pct": 35
+      },
+      {
+        "nome": "Rua José Fulanete",
+        "pct": 20
+      },
+      {
+        "nome": "Rua Padre João Braem",
+        "pct": 15
+      },
+      {
+        "nome": "Vicinal Joaquim Jose Bitencourt (santopolis/luizia",
+        "pct": 5
+      },
+      {
+        "nome": "Avenida Padre Antonio Vieira",
+        "pct": 5
+      },
+      {
+        "nome": "Avenida Padre Anchieta",
+        "pct": 5
+      },
+      {
+        "nome": "Rua Jose Rosa de Oliveira",
+        "pct": 5
+      },
+      {
+        "nome": "Vicinal Joaquim Jose Bitencourt",
+        "pct": 5
+      },
+      {
+        "nome": "Praca Benedito Claudio",
+        "pct": 5
+      }
+    ]
+  },
+  "pontos": [
+    {
+      "lat": -21.673,
+      "lon": -50.323,
+      "n": 2
+    },
+    {
+      "lat": -21.675,
+      "lon": -50.326,
+      "n": 1
+    },
+    {
+      "lat": -21.666,
+      "lon": -50.312,
+      "n": 1
+    },
+    {
+      "lat": -21.682,
+      "lon": -50.444,
+      "n": 1
+    },
+    {
+      "lat": -21.673,
+      "lon": -50.326,
+      "n": 4
+    },
+    {
+      "lat": -21.676,
+      "lon": -50.327,
+      "n": 2
+    },
+    {
+      "lat": -21.677,
+      "lon": -50.331,
+      "n": 1
+    },
+    {
+      "lat": -21.674,
+      "lon": -50.33,
+      "n": 2
+    },
+    {
+      "lat": -21.676,
+      "lon": -50.326,
+      "n": 1
+    },
+    {
+      "lat": -21.68,
+      "lon": -50.325,
+      "n": 1
+    },
+    {
+      "lat": -21.665,
+      "lon": -50.31,
+      "n": 1
+    },
+    {
+      "lat": -21.675,
+      "lon": -50.33,
+      "n": 1
+    },
+    {
+      "lat": -21.474,
+      "lon": -50.105,
+      "n": 1
+    }
+  ]
+}

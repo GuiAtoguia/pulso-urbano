@@ -1,0 +1,178 @@
+{
+  "ibge": "3537701",
+  "nome": "Piacatu",
+  "uf": "SP",
+  "fonte": "Infosiga-SP — últimas 2 semanas completas disponíveis no extrato",
+  "periodo": "20 set 2026 – 26 set 2026",
+  "simulado": false,
+  "total": 0,
+  "porHora": [
+    2,
+    2,
+    7,
+    4,
+    6,
+    5,
+    2,
+    6,
+    2
+  ],
+  "porDia": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "variacaoSemanaPct": -100,
+  "pico": "10h",
+  "ranking": {
+    "tipo": "via",
+    "itens": [
+      {
+        "nome": "Avenida Doutor José Baneste",
+        "pct": 18
+      },
+      {
+        "nome": "Rua Alexandre Fleming",
+        "pct": 16
+      },
+      {
+        "nome": "Rua Domingos Pestana Garcez",
+        "pct": 11
+      },
+      {
+        "nome": "Avenida Doutor Jose Benetti",
+        "pct": 11
+      },
+      {
+        "nome": "Rua Domingos Vidal",
+        "pct": 5
+      },
+      {
+        "nome": "Polícia Militar do Estado de São Paulo R Doming",
+        "pct": 5
+      },
+      {
+        "nome": "Sp 461",
+        "pct": 5
+      },
+      {
+        "nome": "Rua Felipe dos Santos",
+        "pct": 3
+      },
+      {
+        "nome": "Avenida Antônio Marchi",
+        "pct": 3
+      },
+      {
+        "nome": "Domingos Pestana Garcia",
+        "pct": 3
+      }
+    ]
+  },
+  "pontos": [
+    {
+      "lat": -21.595,
+      "lon": -50.6,
+      "n": 8
+    },
+    {
+      "lat": -21.592,
+      "lon": -50.604,
+      "n": 1
+    },
+    {
+      "lat": -21.59,
+      "lon": -50.598,
+      "n": 1
+    },
+    {
+      "lat": -21.59,
+      "lon": -50.599,
+      "n": 1
+    },
+    {
+      "lat": -21.588,
+      "lon": -50.596,
+      "n": 5
+    },
+    {
+      "lat": -21.591,
+      "lon": -50.603,
+      "n": 1
+    },
+    {
+      "lat": -21.595,
+      "lon": -50.597,
+      "n": 1
+    },
+    {
+      "lat": -21.565,
+      "lon": -50.407,
+      "n": 1
+    },
+    {
+      "lat": -21.593,
+      "lon": -50.599,
+      "n": 3
+    },
+    {
+      "lat": -21.62,
+      "lon": -50.624,
+      "n": 2
+    },
+    {
+      "lat": -21.589,
+      "lon": -50.602,
+      "n": 1
+    },
+    {
+      "lat": -21.594,
+      "lon": -50.599,
+      "n": 3
+    },
+    {
+      "lat": -21.591,
+      "lon": -50.598,
+      "n": 1
+    },
+    {
+      "lat": -21.621,
+      "lon": -50.626,
+      "n": 1
+    },
+    {
+      "lat": -21.589,
+      "lon": -50.597,
+      "n": 1
+    },
+    {
+      "lat": -21.397,
+      "lon": -50.483,
+      "n": 1
+    },
+    {
+      "lat": -21.594,
+      "lon": -50.595,
+      "n": 1
+    },
+    {
+      "lat": -21.555,
+      "lon": -50.574,
+      "n": 1
+    },
+    {
+      "lat": -21.594,
+      "lon": -50.598,
+      "n": 1
+    },
+    {
+      "lat": -21.587,
+      "lon": -50.596,
+      "n": 1
+    }
+  ]
+}

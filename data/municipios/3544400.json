@@ -1,0 +1,125 @@
+{
+  "ibge": "3544400",
+  "nome": "Rubiácea",
+  "uf": "SP",
+  "fonte": "Infosiga-SP — últimas 2 semanas completas disponíveis no extrato",
+  "periodo": "20 set 2026 – 26 set 2026",
+  "simulado": false,
+  "total": 0,
+  "porHora": [
+    1,
+    2,
+    0,
+    3,
+    0,
+    1,
+    2,
+    3,
+    2
+  ],
+  "porDia": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "variacaoSemanaPct": 0,
+  "pico": "12h",
+  "ranking": {
+    "tipo": "via",
+    "itens": [
+      {
+        "nome": "Rua José Bordon",
+        "pct": 41
+      },
+      {
+        "nome": "Sp 300",
+        "pct": 24
+      },
+      {
+        "nome": "Spinheira",
+        "pct": 6
+      },
+      {
+        "nome": "Spa 561",
+        "pct": 6
+      },
+      {
+        "nome": "Estrada Vicinal Angelo Zancaner",
+        "pct": 6
+      },
+      {
+        "nome": "Rua Um",
+        "pct": 6
+      },
+      {
+        "nome": "Avenida Dona Angelina de Lima Correa",
+        "pct": 6
+      },
+      {
+        "nome": "Estrada Vicinal Isaias de Souza Lima",
+        "pct": 6
+      }
+    ]
+  },
+  "pontos": [
+    {
+      "lat": -21.301,
+      "lon": -50.728,
+      "n": 2
+    },
+    {
+      "lat": -21.209,
+      "lon": -50.741,
+      "n": 1
+    },
+    {
+      "lat": -21.299,
+      "lon": -50.729,
+      "n": 5
+    },
+    {
+      "lat": -21.21,
+      "lon": -50.731,
+      "n": 1
+    },
+    {
+      "lat": -21.207,
+      "lon": -50.758,
+      "n": 1
+    },
+    {
+      "lat": -21.209,
+      "lon": -50.742,
+      "n": 1
+    },
+    {
+      "lat": -21.214,
+      "lon": -50.684,
+      "n": 1
+    },
+    {
+      "lat": -21.297,
+      "lon": -50.731,
+      "n": 2
+    },
+    {
+      "lat": -21.21,
+      "lon": -50.734,
+      "n": 1
+    },
+    {
+      "lat": -21.299,
+      "lon": -50.727,
+      "n": 1
+    },
+    {
+      "lat": -21.427,
+      "lon": -50.834,
+      "n": 1
+    }
+  ]
+}

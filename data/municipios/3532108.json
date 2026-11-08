@@ -1,0 +1,143 @@
+{
+  "ibge": "3532108",
+  "nome": "Murutinga do Sul",
+  "uf": "SP",
+  "fonte": "Infosiga-SP — últimas 2 semanas completas disponíveis no extrato",
+  "periodo": "20 set 2026 – 26 set 2026",
+  "simulado": false,
+  "total": 0,
+  "porHora": [
+    1,
+    1,
+    0,
+    3,
+    4,
+    4,
+    2,
+    3,
+    1
+  ],
+  "porDia": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "variacaoSemanaPct": -100,
+  "pico": "14h",
+  "ranking": {
+    "tipo": "via",
+    "itens": [
+      {
+        "nome": "Rua José Aparecido Jesus France",
+        "pct": 17
+      },
+      {
+        "nome": "Sp 300",
+        "pct": 13
+      },
+      {
+        "nome": "Rua Orlando Molina",
+        "pct": 13
+      },
+      {
+        "nome": "Polícia Militar",
+        "pct": 9
+      },
+      {
+        "nome": "Rua Batista Rosticheli",
+        "pct": 4
+      },
+      {
+        "nome": "Vicinal Planalto P/ Andradina",
+        "pct": 4
+      },
+      {
+        "nome": "Prefeito Romeu Cestari",
+        "pct": 4
+      },
+      {
+        "nome": "Praça Pedro Storti",
+        "pct": 4
+      },
+      {
+        "nome": "Estrada do Jao",
+        "pct": 4
+      },
+      {
+        "nome": "Rua Antônio Calestini",
+        "pct": 4
+      }
+    ]
+  },
+  "pontos": [
+    {
+      "lat": -20.994,
+      "lon": -51.273,
+      "n": 6
+    },
+    {
+      "lat": -20.997,
+      "lon": -51.278,
+      "n": 1
+    },
+    {
+      "lat": -20.948,
+      "lon": -51.283,
+      "n": 1
+    },
+    {
+      "lat": -20.995,
+      "lon": -51.284,
+      "n": 1
+    },
+    {
+      "lat": -20.981,
+      "lon": -51.229,
+      "n": 1
+    },
+    {
+      "lat": -20.976,
+      "lon": -51.237,
+      "n": 1
+    },
+    {
+      "lat": -20.989,
+      "lon": -51.28,
+      "n": 2
+    },
+    {
+      "lat": -20.987,
+      "lon": -51.28,
+      "n": 3
+    },
+    {
+      "lat": -20.988,
+      "lon": -51.277,
+      "n": 2
+    },
+    {
+      "lat": -20.991,
+      "lon": -51.275,
+      "n": 2
+    },
+    {
+      "lat": -20.994,
+      "lon": -51.275,
+      "n": 1
+    },
+    {
+      "lat": -20.986,
+      "lon": -51.279,
+      "n": 1
+    },
+    {
+      "lat": -20.989,
+      "lon": -51.279,
+      "n": 1
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "ibge": "3527256",
+  "nome": "Lourdes",
+  "uf": "SP",
+  "fonte": "Infosiga-SP — últimas 2 semanas completas disponíveis no extrato",
+  "periodo": "20 set 2026 – 26 set 2026",
+  "simulado": false,
+  "total": 0,
+  "porHora": [
+    1,
+    0,
+    0,
+    2,
+    1,
+    0,
+    5,
+    1,
+    1
+  ],
+  "porDia": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "variacaoSemanaPct": 0,
+  "pico": "18h",
+  "ranking": {
+    "tipo": "via",
+    "itens": [
+      {
+        "nome": "Rua José Luís de Oliveira",
+        "pct": 23
+      },
+      {
+        "nome": "Rua Jose Marques Nogueira",
+        "pct": 23
+      },
+      {
+        "nome": "Rua Francisco da Silva",
+        "pct": 15
+      },
+      {
+        "nome": "Rua Pio Antônio Figueiredo",
+        "pct": 8
+      },
+      {
+        "nome": "Vicinal Sebastiao Pereira de Carvalho",
+        "pct": 8
+      },
+      {
+        "nome": "Rua Segisfredo Querino da Silva",
+        "pct": 8
+      },
+      {
+        "nome": "Rua Jose Soares da Silva",
+        "pct": 8
+      },
+      {
+        "nome": "Rua Um",
+        "pct": 8
+      }
+    ]
+  },
+  "pontos": [
+    {
+      "lat": -20.969,
+      "lon": -50.225,
+      "n": 2
+    },
+    {
+      "lat": -20.968,
+      "lon": -50.227,
+      "n": 3
+    },
+    {
+      "lat": -20.966,
+      "lon": -50.227,
+      "n": 1
+    },
+    {
+      "lat": -20.968,
+      "lon": -50.226,
+      "n": 2
+    },
+    {
+      "lat": -20.964,
+      "lon": -50.227,
+      "n": 2
+    },
+    {
+      "lat": -20.966,
+      "lon": -50.228,
+      "n": 1
+    },
+    {
+      "lat": -20.964,
+      "lon": -50.228,
+      "n": 1
+    },
+    {
+      "lat": -20.967,
+      "lon": -50.226,
+      "n": 1
+    }
+  ]
+}
