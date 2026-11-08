@@ -6,6 +6,7 @@
 import { scaleHeat, formatVariacaoPct, topVias, buildWeekPath } from './calc.js';
 import { carregarMunicipio } from './data.js';
 import { gerarInsights } from './insights.js';
+import { buscarClima, weathercodeParaIcone, weathercodeParaTexto } from './clima.js';
 
 const escapeHTML = t => String(t).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
@@ -17,6 +18,11 @@ let geocodeSequence = 0;
 
 // status: 'carregando' | 'ok' | 'sem-dados' | 'erro'
 const municipioData = { status: 'carregando', dados: null };
+
+// status: 'carregando' | 'ok' | 'erro'
+const climaData = { status: 'carregando', dados: null };
+let climaSequence = 0;
+const DIAS_SEMANA = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
 
 function topHeader() {
   return `<header class="pu-header">
@@ -83,7 +89,22 @@ function viasWidget(dados) {
 }
 
 function softWeather() {
-  return widget('Clima da região', 'cloud-sun', `<div class="pu-weather-main"><div><strong>32°</strong><span>Parcialmente nublado</span></div><div class="pu-weather-icon"><i data-lucide="cloud-sun"></i></div></div><div class="pu-weather-days"><span><b>Sex</b>35°</span><span><b>Sáb</b>36°</span><span><b>Dom</b>31°</span><span><b>Seg</b>29°</span></div><div class="pu-widget-foot">Exemplo visual • não é medição ao vivo</div>`, 'pu-weather-widget');
+  if (climaData.status === 'carregando') {
+    return widget('Clima da região', 'cloud-sun', `<div class="pu-weather-main"><div><strong>—</strong><span>carregando clima…</span></div><div class="pu-weather-icon"><i data-lucide="loader-circle"></i></div></div>`, 'pu-weather-widget');
+  }
+  const dados = climaData.dados;
+  if (climaData.status !== 'ok' || !dados) {
+    return widget('Clima da região', 'cloud-sun', `<div class="pu-weather-main"><div><strong>—</strong><span>clima indisponível</span></div><div class="pu-weather-icon"><i data-lucide="cloud-off"></i></div></div>`, 'pu-weather-widget');
+  }
+  const atual = dados.atual;
+  const icone = weathercodeParaIcone(atual.codigo);
+  const texto = weathercodeParaTexto(atual.codigo);
+  const proximos = dados.dias.slice(1, 5).map(dia => {
+    const data = new Date(`${dia.data}T00:00:00`);
+    const label = DIAS_SEMANA[data.getDay()] ?? '—';
+    return `<span><b>${label}</b>${Number.isFinite(dia.max) ? Math.round(dia.max) + '°' : '—'}</span>`;
+  }).join('');
+  return widget('Clima da região', icone, `<div class="pu-weather-main"><div><strong>${Number.isFinite(atual.temperatura) ? Math.round(atual.temperatura) + '°' : '—'}</strong><span>${escapeHTML(texto)}</span></div><div class="pu-weather-icon"><i data-lucide="${icone}"></i></div></div><div class="pu-weather-days">${proximos}</div><div class="pu-widget-foot">Fonte: ${escapeHTML(dados.fonte)}</div>`, 'pu-weather-widget');
 }
 
 function overviewWidget(dados) {
@@ -164,6 +185,25 @@ async function carregarDadosDoMunicipio() {
   } else {
     municipioData.status = 'erro';
     municipioData.dados = null;
+  }
+  render();
+}
+
+// Busca o clima para as coordenadas atuais da região (region.lat/lon) e atualiza o widget.
+async function carregarClima() {
+  const lat = region.lat, lon = region.lon;
+  const seq = ++climaSequence;
+  climaData.status = 'carregando';
+  climaData.dados = null;
+  render();
+  const resultado = await buscarClima(lat, lon);
+  if (seq !== climaSequence) return; // região trocada enquanto buscava
+  if (resultado.ok) {
+    climaData.status = 'ok';
+    climaData.dados = resultado.dados;
+  } else {
+    climaData.status = 'erro';
+    climaData.dados = null;
   }
   render();
 }
@@ -253,7 +293,7 @@ async function selectCity(name, ibge) {
   closePicker();
   render();
   carregarDadosDoMunicipio();
-  if (coord) return;
+  if (coord) { carregarClima(); return; }
   try {
     const query = encodeURIComponent(`${name}, ${pick.stateName}, Brasil`);
     const r = await fetch(`https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=br&q=${query}`, { signal: AbortSignal.timeout(9000), headers: { 'Accept': 'application/json' } });
@@ -264,6 +304,7 @@ async function selectCity(name, ibge) {
   } catch (e) { coord = null; }
   if (seq !== geocodeSequence) return;
   region.lat = coord ? coord[0] : null; region.lon = coord ? coord[1] : null; region.resolving = false; render();
+  carregarClima();
 }
 document.addEventListener('click', e => {
   const pickerBtn = e.target.closest('[data-open-location]');
@@ -281,3 +322,4 @@ window.addEventListener('resize', () => { if (pick.open) locatePicker(); });
 
 render();
 carregarDadosDoMunicipio();
+carregarClima();
