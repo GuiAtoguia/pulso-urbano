@@ -102,7 +102,7 @@ table.sr-only{position:fixed;left:-9999px;top:-9999px;width:auto;height:auto;mar
 .pu-round-icon.demo-theme-toggle svg{width:18px;height:18px}
 
 /* Corpo / grade de observação */
-.pu-demo-body{padding:clamp(20px,2.2vw,38px) max(20px,calc((100vw - 1450px)/2));flex:1;width:min(100%,1480px);margin:0 auto}
+.pu-demo-body{padding:clamp(20px,2.2vw,38px) max(20px,calc((100vw - 1450px)/2));flex:1}
 .pu-layout{display:grid;gap:16px}
 .pu-content-title{grid-column:1/-1}
 

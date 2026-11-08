@@ -6,10 +6,12 @@
     "gerar-simulado": "node scripts/gerar-simulado.js",
     "gerar-dados": "node scripts/gerar-dados.js",
     "verificar-totais": "node scripts/verificar-totais.js",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:e2e": "playwright test"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.65.0",
     "@vitest/coverage-v8": "^5.1.0",
     "playwright": "^1.65.0",
     "vitest": "5.1.0"
