@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { scaleHeat, formatVariacaoPct, topVias, buildWeekPath } from './calc.js';
+import { scaleHeat, formatVariacaoPct, topVias, buildWeekPath, raioPonto, buildLegendaPontos, classificarPonto } from './calc.js';
 
 describe('scaleHeat', () => {
   it('escala um valor dentro da faixa para 0-100', () => {
@@ -68,6 +68,85 @@ describe('topVias', () => {
   it('retorna array vazio para entrada inválida', () => {
     expect(topVias(undefined)).toEqual([]);
     expect(topVias(null)).toEqual([]);
+  });
+});
+
+describe('raioPonto', () => {
+  it('retorna o raio máximo para o maior valor do conjunto', () => {
+    expect(raioPonto(100, 100, { min: 6, max: 22 })).toBe(22);
+  });
+  it('retorna um raio entre min e max para valores intermediários', () => {
+    const r = raioPonto(25, 100, { min: 6, max: 22 });
+    expect(r).toBeGreaterThan(6);
+    expect(r).toBeLessThan(22);
+  });
+  it('usa escala de área (sqrt), não linear', () => {
+    const rMeio = raioPonto(50, 100, { min: 0, max: 100 });
+    expect(rMeio).toBeCloseTo(70.7, 0);
+  });
+  it('satura no mínimo quando n é 0, negativo ou não numérico', () => {
+    expect(raioPonto(0, 100)).toBe(6);
+    expect(raioPonto(-5, 100)).toBe(6);
+    expect(raioPonto(NaN, 100)).toBe(6);
+    expect(raioPonto(undefined, 100)).toBe(6);
+  });
+  it('retorna min quando maxN é inválido', () => {
+    expect(raioPonto(10, 0)).toBe(6);
+    expect(raioPonto(10, -1)).toBe(6);
+    expect(raioPonto(10, NaN)).toBe(6);
+  });
+  it('não excede o maxN ao calcular a escala (clamp)', () => {
+    expect(raioPonto(500, 100, { min: 6, max: 22 })).toBe(22);
+  });
+});
+
+describe('buildLegendaPontos', () => {
+  it('retorna array vazio para entrada vazia ou inválida', () => {
+    expect(buildLegendaPontos([])).toEqual([]);
+    expect(buildLegendaPontos(null)).toEqual([]);
+    expect(buildLegendaPontos([{ n: 0 }, { n: -3 }])).toEqual([]);
+  });
+  it('gera 3 faixas (baixo, medio, alto) com raio crescente', () => {
+    const pontos = [{ n: 5 }, { n: 34 }, { n: 42 }, { n: 8 }, { n: 209 }];
+    const legenda = buildLegendaPontos(pontos);
+    expect(legenda.map(f => f.chave)).toEqual(['baixo', 'medio', 'alto']);
+    expect(legenda[0].raio).toBeLessThan(legenda[1].raio);
+    expect(legenda[1].raio).toBeLessThan(legenda[2].raio);
+  });
+  it('a última faixa termina no maior valor e a primeira começa no menor', () => {
+    const pontos = [{ n: 1 }, { n: 50 }, { n: 100 }];
+    const legenda = buildLegendaPontos(pontos);
+    expect(legenda[0].min).toBe(1);
+    expect(legenda[legenda.length - 1].max).toBe(100);
+  });
+  it('não lança quando todos os pontos têm o mesmo n', () => {
+    const legenda = buildLegendaPontos([{ n: 10 }, { n: 10 }]);
+    expect(legenda).toHaveLength(3);
+    expect(legenda.every(f => Number.isFinite(f.raio))).toBe(true);
+  });
+  it('ignora itens sem n numérico válido', () => {
+    const legenda = buildLegendaPontos([{ n: 5 }, { lat: 1, lon: 2 }, { n: 'x' }, { n: 50 }]);
+    expect(legenda).toHaveLength(3);
+  });
+});
+
+describe('classificarPonto', () => {
+  const legenda = buildLegendaPontos([{ n: 5 }, { n: 34 }, { n: 42 }, { n: 8 }, { n: 209 }]);
+  it('classifica um valor baixo na primeira faixa', () => {
+    expect(classificarPonto(5, legenda).chave).toBe('baixo');
+  });
+  it('classifica o maior valor na última faixa', () => {
+    expect(classificarPonto(209, legenda).chave).toBe('alto');
+  });
+  it('classifica um valor acima do máximo na última faixa (sem lançar)', () => {
+    expect(classificarPonto(9999, legenda).chave).toBe('alto');
+  });
+  it('retorna null para legenda vazia ou inválida', () => {
+    expect(classificarPonto(5, [])).toBeNull();
+    expect(classificarPonto(5, null)).toBeNull();
+  });
+  it('retorna a primeira faixa para n não numérico', () => {
+    expect(classificarPonto(NaN, legenda)).toBe(legenda[0]);
   });
 });
 

@@ -3,7 +3,7 @@
 // são alimentados por data/municipios/<ibge>.json (ver js/data.js e CLAUDE.md).
 // Clima e visão geral ainda não estão ligados a dados reais (fora do escopo desta etapa).
 
-import { scaleHeat, formatVariacaoPct, topVias, buildWeekPath } from './calc.js';
+import { scaleHeat, formatVariacaoPct, topVias, buildWeekPath, raioPonto, buildLegendaPontos, classificarPonto, CORES_PONTOS } from './calc.js';
 import { carregarMunicipio } from './data.js';
 import { gerarInsights } from './insights.js';
 import { buscarClima, weathercodeParaIcone, weathercodeParaTexto } from './clima.js';
@@ -128,22 +128,105 @@ function overviewWidget(dados) {
     </div>`, 'pu-overview-widget');
 }
 
-function mapFilled() {
-  // O mapa mantém só a indicação da região e o atalho externo.
+// Legenda (tamanho + cor) dos pontos do mapa — mesma função pura usada para colorir os
+// circleMarker em desenharPontos(), para nunca divergir do que é mostrado no mapa.
+function legendaMapaHTML(dados) {
+  const legenda = buildLegendaPontos(dados?.pontos);
+  if (!legenda.length) return '';
+  const linhas = legenda.map(f => {
+    const cor = CORES_PONTOS[f.chave] ?? CORES_PONTOS.baixo;
+    const tamanho = Math.max(10, f.raio * 1.5);
+    return `<li><span class="pu-legenda-marca" style="width:${tamanho}px;height:${tamanho}px;background:${cor.fill};border-color:${cor.stroke}"></span><span>${f.rotulo} sinistro${f.max === 1 ? '' : 's'}</span></li>`;
+  }).join('');
+  return `<ul class="map-legend" aria-label="Legenda: tamanho e cor dos pontos indicam o número de sinistros">${linhas}</ul>`;
+}
+
+function mapFilled(dados) {
+  // O mapa em si (Leaflet) é montado por montarMapa() depois do render — aqui só
+  // preparamos o invólucro e, quando as coordenadas ainda não existem, o aviso.
   if (region.resolving) return `<div class="map-frame map-status"><div class="location-loading"><i data-lucide="loader-circle"></i><strong>Localizando ${escapeHTML(region.name)}...</strong><small>Consultando coordenadas do município.</small></div></div>`;
   if (!Number.isFinite(region.lat) || !Number.isFinite(region.lon)) return `<div class="map-frame map-status"><div class="location-loading"><i data-lucide="map-pin-off"></i><strong>Mapa ainda não disponível</strong><small>Não foi possível encontrar as coordenadas de ${escapeHTML(region.name)}. Selecione outra cidade.</small></div></div>`;
-  const lat = region.lat, lon = region.lon;
-  const deg = 0.05, bb = [lon - deg, lat - deg, lon + deg, lat + deg];
-  const bbox = bb.map(n => n.toFixed(6)).join(',');
-  const src = 'https://www.openstreetmap.org/export/embed.html?bbox=' + encodeURIComponent(bbox) + '&layer=mapnik&marker=' + encodeURIComponent(lat + ',' + lon);
-  const out = 'https://www.openstreetmap.org/#map=13/' + lat.toFixed(5) + '/' + lon.toFixed(5);
+  const out = 'https://www.openstreetmap.org/#map=13/' + region.lat.toFixed(5) + '/' + region.lon.toFixed(5);
   return `<div class="map-frame">
-    <iframe loading="lazy" title="Mapa de ${escapeHTML(region.name)} no OpenStreetMap" referrerpolicy="strict-origin-when-cross-origin" src="${src}"></iframe>
+    <div class="pu-leaflet-slot" id="leafletSlot"></div>
     <div class="map-quiet-head"><span><i data-lucide="map-pin"></i> ${escapeHTML(region.name)}, ${escapeHTML(region.uf)}</span></div>
     <div class="map-quiet-tools"><a class="map-open-external" title="Abrir mapa no OpenStreetMap" aria-label="Abrir mapa no OpenStreetMap" href="${out}" target="_blank" rel="noopener noreferrer"><i data-lucide="external-link"></i></a></div>
-    <span class="map-attribution">© OpenStreetMap</span>
+    <div class="map-tile-warning" id="mapTileWarning" role="status" hidden><i data-lucide="triangle-alert"></i>Tiles do mapa indisponíveis no momento</div>
+    ${legendaMapaHTML(dados)}
+    <span class="map-attribution">© OpenStreetMap contributors</span>
   </div>`;
 }
+
+// --- Leaflet: uma única instância reaproveitada entre re-renders -----------------
+// O #app inteiro é substituído a cada render(), então o container do mapa é
+// recriado como string a cada vez. Para não recriar o mapa (e não duplicá-lo),
+// mantemos o DOM do Leaflet num elemento próprio e o reinserimos no novo slot.
+const leafletEl = document.createElement('div');
+leafletEl.className = 'pu-leaflet-map';
+let leafletMap = null;
+let leafletTiles = null;
+let leafletPontos = null;
+let tileAvisoAtivo = false;
+let ultimoCentro = null;
+
+function desenharPontos() {
+  if (!leafletPontos) return;
+  leafletPontos.clearLayers();
+  const dados = municipioData.status === 'ok' ? municipioData.dados : null;
+  const pontos = Array.isArray(dados?.pontos)
+    ? dados.pontos.filter(p => Number.isFinite(p?.lat) && Number.isFinite(p?.lon) && Number.isFinite(p?.n) && p.n > 0)
+    : [];
+  if (!pontos.length) return; // sem pontos: mostra só o mapa
+  const maxN = Math.max(...pontos.map(p => p.n));
+  const legenda = buildLegendaPontos(pontos);
+  for (const ponto of pontos) {
+    const faixa = classificarPonto(ponto.n, legenda);
+    const cor = CORES_PONTOS[faixa?.chave] ?? CORES_PONTOS.baixo;
+    window.L.circleMarker([ponto.lat, ponto.lon], {
+      radius: raioPonto(ponto.n, maxN),
+      color: cor.stroke,
+      weight: 1.5,
+      fillColor: cor.fill,
+      fillOpacity: 0.85,
+    })
+      .bindPopup(`<strong>${ponto.n}</strong> sinistro${ponto.n === 1 ? '' : 's'} registrado${ponto.n === 1 ? '' : 's'} nesta área`)
+      .addTo(leafletPontos);
+  }
+}
+
+// Monta o Leaflet no slot atual (se houver) e atualiza centro/pontos sem duplicar a instância.
+function montarMapa() {
+  const slot = $('#leafletSlot');
+  if (!slot || !window.L) return; // sem coordenadas ainda, ou Leaflet não carregou
+  slot.appendChild(leafletEl); // reparenta o mesmo nó; remove automaticamente do local anterior
+  if (!leafletMap) {
+    leafletMap = window.L.map(leafletEl, { attributionControl: false }).setView([region.lat, region.lon], 13);
+    leafletTiles = window.L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      minZoom: 3,
+    }).addTo(leafletMap);
+    leafletTiles.on('tileerror', () => {
+      tileAvisoAtivo = true;
+      const aviso = $('#mapTileWarning');
+      if (aviso) aviso.hidden = false;
+    });
+    leafletPontos = window.L.layerGroup().addTo(leafletMap);
+    ultimoCentro = `${region.lat},${region.lon}`;
+  } else {
+    const centroAtual = `${region.lat},${region.lon}`;
+    if (centroAtual !== ultimoCentro) {
+      leafletMap.setView([region.lat, region.lon], 13);
+      ultimoCentro = centroAtual;
+    }
+  }
+  leafletEl.setAttribute('aria-label', `Mapa de ${region.name}, ${region.uf}. Use as setas para mover e + ou - para dar zoom.`);
+  const aviso = $('#mapTileWarning');
+  if (aviso) aviso.hidden = !tileAvisoAtivo;
+  desenharPontos();
+  requestAnimationFrame(() => leafletMap.invalidateSize());
+}
+
+window.addEventListener('resize', () => { if (leafletMap) leafletMap.invalidateSize(); });
 
 function renderAppContent() {
   const dados = municipioData.status === 'ok' ? municipioData.dados : null;
@@ -153,7 +236,7 @@ function renderAppContent() {
     <div class="pu-layout pu-grid">
       <div class="pu-structure pu-grid-structure">
         <div class="pu-grid-stats">${statsWidget(dados)}</div>
-        <div class="pu-grid-map">${mapFilled()}</div>
+        <div class="pu-grid-map">${mapFilled(dados)}</div>
         <div class="pu-grid-side">${viasWidget(dados)}${softWeather()}</div>
         <div class="pu-grid-bottom">${trendWidget(dados)}${heatWidget(dados)}</div>
       </div>
@@ -166,6 +249,7 @@ function render() {
   $('#app').innerHTML = renderAppContent();
   document.documentElement.dataset.mode = state.mode;
   if (window.lucide?.createIcons) window.lucide.createIcons();
+  montarMapa();
 }
 
 // Busca os dados do município atual (region.ibge) e atualiza os widgets quando chegarem.

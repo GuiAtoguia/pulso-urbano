@@ -41,6 +41,61 @@ function catmullRomPath(pontos) {
   return d;
 }
 
+// Cores dos pontos do mapa, por faixa de intensidade (fonte única para marcador e legenda).
+export const CORES_PONTOS = {
+  baixo: { fill: '#60a5fa', stroke: '#ffffff' },
+  medio: { fill: '#2563eb', stroke: '#ffffff' },
+  alto: { fill: '#1e3a8a', stroke: '#ffffff' },
+};
+
+const FAIXAS_CHAVES = ['baixo', 'medio', 'alto'];
+
+// Raio (px) de um circleMarker proporcional a n, em escala de área (sqrt) — evita que
+// valores grandes dominem visualmente demais o mapa. Satura entre min e max.
+export function raioPonto(n, maxN, { min = 6, max = 22 } = {}) {
+  if (!Number.isFinite(maxN) || maxN <= 0) return min;
+  if (!Number.isFinite(n) || n <= 0) return min;
+  const escala = Math.sqrt(Math.min(n, maxN) / maxN);
+  return Math.round(min + escala * (max - min));
+}
+
+// Gera as 3 faixas da legenda (baixo/médio/alto) a partir dos valores de n em pontos[].
+// Cada faixa traz rótulo (intervalo), raio equivalente e é usada tanto para desenhar
+// a legenda quanto para classificar cada ponto (ver classificarPonto).
+export function buildLegendaPontos(pontos, { min = 6, max = 22 } = {}) {
+  const valores = (Array.isArray(pontos) ? pontos : [])
+    .map(p => p?.n)
+    .filter(n => Number.isFinite(n) && n > 0);
+  if (!valores.length) return [];
+  const maxN = Math.max(...valores);
+  const minN = Math.min(...valores);
+  const span = Math.max(maxN - minN, 1);
+  const n = FAIXAS_CHAVES.length;
+  const limites = [minN];
+  for (let i = 1; i < n; i++) {
+    limites.push(Math.max(Math.round(minN + (span * i) / n), limites[i - 1]));
+  }
+  limites.push(Math.max(maxN, limites[n - 1]));
+  return FAIXAS_CHAVES.map((chave, i) => {
+    const limiteSuperior = limites[i + 1];
+    const limiteInferior = i === 0 ? limites[0] : Math.min(limites[i] + 1, limiteSuperior);
+    return {
+      chave,
+      rotulo: limiteInferior === limiteSuperior ? `${limiteInferior}` : `${limiteInferior}–${limiteSuperior}`,
+      min: limiteInferior,
+      max: limiteSuperior,
+      raio: raioPonto(limiteSuperior, maxN, { min, max }),
+    };
+  });
+}
+
+// Encontra a faixa da legenda à qual um valor de n pertence.
+export function classificarPonto(n, legenda) {
+  if (!Array.isArray(legenda) || !legenda.length) return null;
+  if (!Number.isFinite(n)) return legenda[0];
+  return legenda.find(faixa => n <= faixa.max) ?? legenda[legenda.length - 1];
+}
+
 // Gera o traçado SVG (linha suavizada + área) a partir de porDia[7].
 // Eixo Y invertido (SVG): valor maior -> y menor.
 export function buildWeekPath(porDia, { width = 480, height = 150, padding = 18 } = {}) {
