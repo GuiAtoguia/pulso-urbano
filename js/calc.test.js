@@ -183,3 +183,46 @@ describe('buildWeekPath', () => {
     expect(area).toBe(`${line} L100 60 L0 60Z`);
   });
 });
+
+// Município real com total:0 (ex.: sem sinistro na janela de 2 semanas) — nenhuma
+// das funções que alimentam gráficos pode gerar NaN, Infinity ou dividir por zero.
+describe('cenário total 0 / arrays zerados (sem NaN, sem divisão por zero)', () => {
+  it('scaleHeat com porHora todo zerado (heatWidget usa Math.max(...porHora,1) como max)', () => {
+    const porHora = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+    const max = Math.max(...porHora, 1);
+    const escalas = porHora.map(v => scaleHeat(v, max));
+    expect(escalas).toEqual(new Array(9).fill(0));
+    expect(escalas.every(Number.isFinite)).toBe(true);
+  });
+
+  it('buildWeekPath com porDia todo zerado não gera NaN em nenhum ponto', () => {
+    const { line, area, points } = buildWeekPath([0, 0, 0, 0, 0, 0, 0]);
+    expect(points).toHaveLength(7);
+    for (const [x, y] of points) {
+      expect(Number.isFinite(x)).toBe(true);
+      expect(Number.isFinite(y)).toBe(true);
+    }
+    expect(line).not.toContain('NaN');
+    expect(area).not.toContain('NaN');
+    expect(area).not.toContain('Infinity');
+  });
+
+  it('formatVariacaoPct com variação 0 mostra "0%", não "-0%" nem NaN', () => {
+    expect(formatVariacaoPct(0)).toBe('0%');
+    expect(formatVariacaoPct(-0)).toBe('0%');
+  });
+
+  it('formatVariacaoPct com variação ausente (município sem semana anterior p/ comparar) mostra travessão', () => {
+    expect(formatVariacaoPct(null)).toBe('—');
+    expect(formatVariacaoPct(undefined)).toBe('—');
+  });
+
+  it('topVias com ranking.itens vazio (total 0) retorna array vazio, não lança', () => {
+    expect(topVias([], 3)).toEqual([]);
+  });
+
+  it('buildLegendaPontos e raioPonto com pontos:[] (sem coordenada nenhuma) não lançam', () => {
+    expect(buildLegendaPontos([])).toEqual([]);
+    expect(raioPonto(0, 0)).toBe(6);
+  });
+});

@@ -72,9 +72,21 @@ export async function buscarClima(lat, lon) {
   let resultado;
   try {
     const res = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`, { signal: AbortSignal.timeout(TIMEOUT_MS) });
-    if (!res.ok) return { ok: false, motivo: 'indisponivel' };
-    const body = await res.json();
-    if (!body?.current || !body?.daily?.time) return { ok: false, motivo: 'invalido' };
+    if (!res.ok) {
+      console.warn(`[clima] resposta HTTP ${res.status} da Open-Meteo para ${chave}`);
+      return { ok: false, motivo: 'indisponivel' };
+    }
+    let body;
+    try {
+      body = await res.json();
+    } catch (erroParse) {
+      console.warn(`[clima] JSON inválido da Open-Meteo para ${chave}`, erroParse);
+      return { ok: false, motivo: 'invalido' };
+    }
+    if (!body?.current || !body?.daily?.time) {
+      console.warn(`[clima] resposta da Open-Meteo fora do formato esperado para ${chave}`, body);
+      return { ok: false, motivo: 'invalido' };
+    }
     const dias = body.daily.time.map((data, i) => ({
       data,
       max: body.daily.temperature_2m_max?.[i],
@@ -90,7 +102,9 @@ export async function buscarClima(lat, lon) {
       },
     };
   } catch (erro) {
-    return { ok: false, motivo: erro?.name === 'TimeoutError' || erro?.name === 'AbortError' ? 'timeout' : 'rede' };
+    const motivo = erro?.name === 'TimeoutError' || erro?.name === 'AbortError' ? 'timeout' : 'rede';
+    console.warn(`[clima] falha ao buscar previsão para ${chave} (${motivo})`, erro);
+    return { ok: false, motivo };
   }
 
   cache.set(chave, resultado);

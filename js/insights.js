@@ -8,7 +8,7 @@
 
 import { topVias } from './calc.js';
 
-const TOTAL_MINIMO_RANKING = 20;
+export const TOTAL_MINIMO_RANKING = 20;
 const LIMIAR_ESTAVEL = 1; // |variação| < 1% é tratada como estável
 
 const TEMPLATES_PICO = [
